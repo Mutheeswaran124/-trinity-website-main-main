@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Global Styles
 import 'slick-carousel/slick/slick.css';
@@ -26,11 +26,7 @@ import ServicesPage from './components/Services/ServicesPage';
 import IndustriesPage from './components/IndustriesPage';
 import MegaMenuServices from './components/MegaMenus/MegaMenuServices';
 
-// For scroll-to-hash support
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-
-// HomePage component with scroll-to-hash support
+// HomePage with scroll-to-hash and logo at top
 const HomePage = () => {
   const location = useLocation();
 
@@ -40,7 +36,7 @@ const HomePage = () => {
       if (el) {
         setTimeout(() => {
           el.scrollIntoView({ behavior: 'smooth' });
-        }, 200); // Delay ensures DOM is rendered
+        }, 200);
       }
     }
   }, [location]);
@@ -49,6 +45,11 @@ const HomePage = () => {
     <>
       <Header />
       <main>
+        {/* ✅ Logo added here at the top of HomePage */}
+        <div className="flex justify-center mt-6">
+          <img src="/logo.png" alt="Trinity Logo" width={150} />
+        </div>
+
         <Hero />
         <TestimonialCard />
         <About />
@@ -72,8 +73,6 @@ function App() {
         <Route path="/our-story" element={<OurStory />} />
         <Route path="/industries" element={<IndustriesPage />} />
         <Route path="/services" element={<ServicesPage />} />
-
-        {/* Optional: Direct access to services menu */}
         <Route
           path="/services-portal"
           element={
