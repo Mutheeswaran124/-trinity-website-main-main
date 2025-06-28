@@ -4,47 +4,48 @@ import {
   TrendingUp,
   Globe,
   Database,
-  Target,
-  BarChart3,
-  Shield,
-  Sparkles,
-  CheckCircle,
+  Lightbulb,
   Award,
+  Earth,
+  Handshake,
+  CheckCircle,
   Clock,
-  Headphones
+  Headphones,
+  Heart,
+  Zap
 } from 'lucide-react';
 
 const About = () => {
   const stats = [
     { icon: Users, value: '500+', label: 'Projects Delivered', color: 'from-blue-500 to-purple-600' },
-    { icon: TrendingUp, value: '9+', label: 'Years of Experience', color: 'from-purple-500 to-pink-600' },
+    { icon: TrendingUp, value: '25+', label: 'Years Experience', color: 'from-purple-500 to-pink-600' },
     { icon: Globe, value: '10+', label: 'Countries Served', color: 'from-pink-500 to-red-600' },
     { icon: Database, value: '100+', label: 'Data Experts', color: 'from-red-500 to-orange-600' },
   ];
 
   const values = [
     {
-      icon: Target,
-      title: 'Results-Driven',
-      description: 'Every solution is designed to deliver measurable business outcomes and drive growth.',
+      icon: Lightbulb,
+      title: 'Innovation',
+      description: 'We embrace the power of emerging technologies to create solutions that are smarter, faster, and future-ready.',
       color: 'from-blue-500 to-purple-600'
     },
     {
-      icon: BarChart3,
-      title: 'Data-Obsessed',
-      description: 'We leverage advanced analytics and AI to transform your data into actionable insights.',
+      icon: Award,
+      title: 'Excellence',
+      description: 'We strive for perfection in everything we do — from the code we write to the relationships we build. Good isn\'t good enough.',
       color: 'from-purple-500 to-pink-600'
     },
     {
-      icon: Shield,
-      title: 'Client-First',
-      description: 'Your success is our priority. We build long-term partnerships, not just projects.',
+      icon: Earth,
+      title: 'Global Impact',
+      description: 'With a presence across multiple countries, we think beyond borders — solving challenges that create value for businesses and society worldwide.',
       color: 'from-pink-500 to-red-600'
     },
     {
-      icon: Sparkles,
-      title: 'Innovation-Led',
-      description: 'Cutting-edge technology and creative solutions that keep you ahead of the curve.',
+      icon: Handshake,
+      title: 'Collaboration',
+      description: 'We grow stronger together — across teams, with clients, and through partnerships. We believe in open minds and shared wins.',
       color: 'from-red-500 to-orange-600'
     }
   ];
@@ -57,7 +58,7 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
@@ -74,70 +75,69 @@ const About = () => {
               alt="Trinity Logo"
               className="h-16 mb-6 filter brightness-0 invert hue-rotate-180 saturate-200"
             />
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-              We're Not Your
-              <span className="block bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-                Average Agency
-              </span>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-6 leading-tight">
+              Welcome to Trinity Technology Solutions
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We're data engineers, cloud architects, analytics specialists, and digital transformation experts all
-              rolled into one unstoppable team.
+            <p className="text-xl md:text-2xl text-purple-600 font-medium max-w-4xl mx-auto leading-relaxed">
+              Your Global Partner in Data, AI & Digital Transformation
             </p>
           </div>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+        {/* Stats Section - Reduced margin bottom from mb-24 to mb-12 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {stats.map((stat, index) => (
             <div key={index} className="group">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 text-center shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:scale-105 h-full flex flex-col justify-center min-h-[200px]">
                 <div className={`w-16 h-16 mx-auto mb-4 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}>
                   <stat.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-4xl font-semibold text-gray-900 mb-2">{stat.value}</div>
+                <div className="text-gray-600 font-medium text-center leading-tight px-2">{stat.label}</div>
               </div>
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Mission Section */}
-        <div className="grid md:grid-cols-2 gap-16 items-center mb-24">
-          <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Our Mission: Digital Transformation That
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                Actually Works
-              </span>
+      {/* About Us Section - Extra Wide Container */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+          <div className="max-w-4xl">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-6">
+              About Us
             </h2>
             <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              Founded in 2020, Trinity Technology Solution LLC has been at the forefront of digital transformation,
-              helping enterprises harness the power of data analytics and cloud solutions. We don't just build systems;
-              we build futures.
+              Founded in 2020, Trinity began as a specialist staffing company — but we didn't stop there. Born from the vision of a founder with over 25 years of HR leadership and backed by partners with 25+ years of deep data expertise, we're built on the rare blend of people insight and technical mastery.
             </p>
-            <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-              As a certified Databricks partner, we specialize in data engineering, analytics, and AI solutions that
-              drive business growth and operational efficiency. Our expertise spans across cloud migration, data governance,
-              and enterprise-scale digital transformation initiatives.
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              With a sharp understanding of talent, technology, and business challenges, we've evolved into a full-scale software solutions provider. Today, we stand at the forefront of Data & AI innovation, helping businesses transform with confidence.
+            </p>
+            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              This synergy is our biggest strength — and your biggest advantage. From data engineering and AI-driven platforms to enterprise software and digital products, our diverse team delivers outcomes that matter — consistently, efficiently, and with heart.
             </p>
 
-            {/* Our Promise Card */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border-l-4 border-blue-500">
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Our Promise</h3>
-              <p className="text-gray-700 italic mb-4">
-                "We don't get paid unless you grow. Every strategy, every solution, every optimization is designed
-                to move your most important business metrics."
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
-                  TT
-                </div>
-                <div>
-                  <div className="font-semibold text-gray-900">Trinity Technology Team</div>
-                  <div className="text-sm text-gray-600">Founders & Technology Partners</div>
-                </div>
+            {/* Mission Statement */}
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border-l-4 border-blue-500 mb-8">
+              <div className="flex items-center mb-4">
+                <Heart className="w-6 h-6 text-red-500 mr-3" />
+                <h3 className="text-xl font-semibold text-gray-900">Our Mission</h3>
               </div>
+              <p className="text-gray-700 text-lg leading-relaxed">
+                We don't just build tech.<br />
+                <span className="font-medium">We build trust. We build the future.</span>
+              </p>
+            </div>
+
+            {/* Unique Value Proposition */}
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border-l-4 border-purple-500">
+              <div className="flex items-center mb-4">
+                <Zap className="w-6 h-6 text-purple-500 mr-3" />
+                <h3 className="text-xl font-semibold text-gray-900">What Sets Us Apart</h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                The rare blend of people insight and technical mastery — combining 25+ years of HR leadership with deep data expertise to deliver solutions that truly understand both technology and human needs.
+              </p>
             </div>
           </div>
 
@@ -146,29 +146,31 @@ const About = () => {
               <img
                 src="https://images.pexels.com/photos/3184432/pexels-photo-3184432.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Team collaboration"
-                className="w-full h-96 object-cover"
+                className="w-full h-[500px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
             </div>
 
-            {/* Floating card */}
-            <div className="absolute -bottom-8 -left-8 bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-              <h4 className="font-bold text-gray-900 mb-3">Why Clients Choose Us</h4>
-              <div className="space-y-3">
+            {/* Floating card - Larger with bigger text */}
+            <div className="absolute -bottom-10 -left-10 bg-white rounded-xl p-8 shadow-lg border border-gray-100 max-w-sm">
+              <h4 className="font-semibold text-gray-900 mb-4 text-lg">Why Clients Choose Us</h4>
+              <div className="space-y-4">
                 {clientBenefits.map((benefit, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <benefit.icon className={`w-5 h-5 ${benefit.color}`} />
-                    <span className="text-sm text-gray-700">{benefit.text}</span>
+                    <benefit.icon className={`w-6 h-6 ${benefit.color}`} />
+                    <span className="text-base text-gray-700">{benefit.text}</span>
                   </div>
                 ))}
               </div>
             </div>
           </div>
         </div>
+      </div>
 
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Partnership Highlight */}
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 mb-24 text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">Official Databricks Partner</h3>
+          <h3 className="text-2xl font-semibold mb-4">Official Databricks Partner</h3>
           <p className="text-lg text-blue-100 max-w-3xl mx-auto">
             Our strategic partnership with Databricks enables us to deliver cutting-edge lakehouse architecture
             and advanced analytics solutions that transform how organizations leverage their data assets.
@@ -177,21 +179,22 @@ const About = () => {
 
         {/* Values Section */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Makes Us Different</h2>
+          <h2 className="text-3xl font-semibold text-gray-900 mb-4">Our Core Values</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Our core values drive everything we do, ensuring exceptional results for every client.
+            The DNA of how we think, build, and lead.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Fixed Grid Layout - Proper 4 columns on large screens */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {values.map((value, index) => (
             <div key={index} className="group">
-              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className={`w-16 h-16 mb-6 rounded-xl bg-gradient-to-r ${value.color} flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}>
-                  <value.icon className="w-8 h-8 text-white" />
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                <div className={`w-14 h-14 lg:w-16 lg:h-16 mb-4 lg:mb-6 rounded-xl bg-gradient-to-r ${value.color} flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}>
+                  <value.icon className="w-7 h-7 lg:w-8 lg:h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <h3 className="text-lg lg:text-xl font-semibold text-gray-900 mb-3 lg:mb-4">{value.title}</h3>
+                <p className="text-sm lg:text-base text-gray-600 leading-relaxed flex-grow">{value.description}</p>
               </div>
             </div>
           ))}
