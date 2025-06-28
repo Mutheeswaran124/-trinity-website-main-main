@@ -54,7 +54,11 @@ const Header = () => {
   return (
     <>
       <header
+<<<<<<< HEAD
         className={`fixed w-full z-50 transition-all duration-300 font-sans ${
+=======
+        className={`fixed w-full z-50 transition-all duration-300 font-sans -mt-2 ${
+>>>>>>> e44a78a (commit)
           isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-3'
         }`}
         style={{ fontFamily: 'Poppins, sans-serif' }}
@@ -102,7 +106,15 @@ const Header = () => {
 
           {/* Mobile Menu Toggle */}
           <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)}>
+<<<<<<< HEAD
             {isOpen ? <X size={28} className="text-blue-600" /> : <Menu size={28} className="text-blue-600" />}
+=======
+            {isOpen ? (
+              <X size={28} className="text-blue-600" />
+            ) : (
+              <Menu size={28} className="text-blue-600" />
+            )}
+>>>>>>> e44a78a (commit)
           </button>
         </div>
       </header>
