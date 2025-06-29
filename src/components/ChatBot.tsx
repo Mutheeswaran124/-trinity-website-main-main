@@ -11,7 +11,8 @@ interface Message {
 
 const Chatbot: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showGreeting, setShowGreeting] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(true); // Always start with greeting visible
+  const [greetingDismissed, setGreetingDismissed] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -41,31 +42,27 @@ const Chatbot: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Show greeting popup after component mounts
+  // Show greeting immediately when component mounts and keep it visible
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (!greetingDismissed) {
       setShowGreeting(true);
-    }, 2000); // Show greeting after 2 seconds
-
-    // Hide greeting after 5 seconds if user doesn't interact
-    const hideTimer = setTimeout(() => {
-      setShowGreeting(false);
-    }, 7000);
-
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(hideTimer);
-    };
-  }, []);
+    }
+  }, [greetingDismissed]);
 
   const handleChatOpen = () => {
     setIsOpen(true);
-    setShowGreeting(false);
+    // Don't hide greeting when opening chat - let user manually dismiss it
   };
 
   const handleGreetingClick = () => {
-    setShowGreeting(false);
     setIsOpen(true);
+    // Keep greeting visible even when opening chat
+  };
+
+  const handleGreetingDismiss = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowGreeting(false);
+    setGreetingDismissed(true);
   };
 
   const handleSendMessage = async (text: string) => {
@@ -227,9 +224,9 @@ const Chatbot: React.FC = () => {
 
   return (
     <>
-      {/* Greeting Popup */}
+      {/* Greeting Popup - Always visible until manually dismissed */}
       <AnimatePresence>
-        {showGreeting && !isOpen && (
+        {showGreeting && !greetingDismissed && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -238,25 +235,22 @@ const Chatbot: React.FC = () => {
             className="fixed bottom-24 right-6 z-40 max-w-xs"
           >
             <div
-              className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 cursor-pointer hover:shadow-3xl transition-shadow duration-300"
+              className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 cursor-pointer hover:shadow-3xl transition-shadow duration-300 relative"
               onClick={handleGreetingClick}
             >
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-[#22396b] to-[#3d3dff] rounded-full flex items-center justify-center flex-shrink-0">
                   <Bot className="w-4 h-4 text-white" />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 pr-6">
                   <p className="text-sm text-gray-800 leading-relaxed">
                     👋 Hi! I'm Trinity. Need help with our IT solutions or data services?
                   </p>
                   <p className="text-xs text-gray-500 mt-1">Click to chat with me!</p>
                 </div>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowGreeting(false);
-                  }}
-                  className="w-5 h-5 text-gray-400 hover:text-gray-600 flex items-center justify-center"
+                  onClick={handleGreetingDismiss}
+                  className="absolute top-2 right-2 w-5 h-5 text-gray-400 hover:text-gray-600 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
                 >
                   <X className="w-3 h-3" />
                 </button>

@@ -45,12 +45,7 @@ const HomePage = () => {
     <>
       <Header />
       <main>
-        {/* ✅ Logo added here at the top of HomePage */}
-        <div className="flex justify-center mt-6">
-          <img src="/logo.png" alt="Trinity Logo" width={150} />
-        </div>
-
-        <Hero />
+       <Hero />
         <TestimonialCard />
         <About />
         <Services />
