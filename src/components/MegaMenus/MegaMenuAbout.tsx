@@ -225,16 +225,17 @@ const MegaMenuAbout = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Shimmer effect */}
-          <motion.div
-  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-  animate={{ translateX: ['-100%', '100%'] }}
+   <motion.div
+  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+  animate={{ x: ['-100%', '100%'] }}
   transition={{
     duration: 2,
     repeat: Infinity,
-    repeatDelay: 3,
-    ease: "linear"
+    ease: 'linear',
   }}
 />
+
+
 
           </motion.button>
         </div>

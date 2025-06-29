@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import Header from "../layout/Header";
+
 import {
   BarChart2,
   Database,
@@ -14,9 +17,13 @@ import {
   Award,
   TrendingUp,
   Clock,
+  ArrowLeft,
 } from 'lucide-react';
 
 const ServicesPage = () => {
+  const { serviceId } = useParams();
+  const navigate = useNavigate();
+
   const servicesSections = [
     {
       id: 'data-strategy',
@@ -180,115 +187,146 @@ const ServicesPage = () => {
     }
   ];
 
+  const currentService = servicesSections.find(service => service.id === serviceId);
+  const Icon = currentService?.icon;
+
+  useEffect(() => {
+    if (!currentService) {
+      navigate('/');
+    }
+  }, [currentService, navigate]);
+
+  if (!currentService || !Icon) return null;
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
+      <Header />
+
+      {/* Back Button */}
+      <div className="max-w-7xl mx-auto px-6 pt-8">
+        <button
+          onClick={() => navigate('/')}
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-200 group"
+        >
+          <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" />
+          <span className="font-medium">Back to Services</span>
+        </button>
+      </div>
+
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white py-20">
+      <div className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 text-white py-20 mt-4">
         <div className="absolute inset-0 bg-black/20"></div>
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center bg-blue-700/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-            <Star className="h-4 w-4 mr-2" />
-            <span className="text-sm font-medium">Enterprise-Grade Solutions</span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-            Transform Your Business with Our Services
-          </h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
-            Comprehensive technology solutions designed to accelerate your growth, optimize operations, and drive innovation across every aspect of your business.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <Award className="h-5 w-5 mr-2 text-yellow-400" />
-              <span className="text-sm">98% Success Rate</span>
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="p-4 bg-white/10 backdrop-blur-sm rounded-xl">
+                  <Icon className="h-8 w-8 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-bold">{currentService.title}</h1>
+                  <p className="text-xl text-blue-100 mt-2">{currentService.subtitle}</p>
+                </div>
+              </div>
+
+              <p className="text-lg text-blue-100 mb-8 leading-relaxed">
+                {currentService.description}
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <Award className="h-5 w-5 mr-2 text-yellow-400" />
+                  <span className="text-sm">Enterprise Grade</span>
+                </div>
+                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <TrendingUp className="h-5 w-5 mr-2 text-green-400" />
+                  <span className="text-sm">Proven Results</span>
+                </div>
+                <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <Clock className="h-5 w-5 mr-2 text-blue-400" />
+                  <span className="text-sm">24/7 Support</span>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <TrendingUp className="h-5 w-5 mr-2 text-green-400" />
-              <span className="text-sm">50+ Projects Delivered</span>
-            </div>
-            <div className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
-              <Clock className="h-5 w-5 mr-2 text-blue-400" />
-              <span className="text-sm">24/7 Support</span>
+
+            <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src={currentService.image}
+                  alt={currentService.title}
+                  className="w-full h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Services Sections */}
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {servicesSections.map((service, index) => (
-          <div key={service.id} className={`mb-20 ${index !== servicesSections.length - 1 ? 'border-b border-gray-100 pb-20' : ''}`}>
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
-              {/* Content */}
-              <div className={`space-y-6 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="flex items-center space-x-3">
-                  <div className="p-3 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg">
-                    <service.icon className="h-6 w-6 text-white" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Features */}
+          <div className="lg:col-span-2 space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Key Features & Capabilities</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {currentService.features.map((feature, idx) => (
+                  <div key={idx} className="flex items-center space-x-3 p-4 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    <span className="text-gray-700 font-medium">{feature}</span>
                   </div>
-                  <div>
-                    <h2 className="text-3xl font-bold text-gray-900">{service.title}</h2>
-                    <p className="text-lg text-blue-600 font-medium">{service.subtitle}</p>
-                  </div>
-                </div>
-
-                <p className="text-gray-600 text-lg leading-relaxed">
-                  {service.description}
-                </p>
-
-                {/* Features */}
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold text-gray-900">Key Features</h3>
-                  <div className="grid grid-cols-1 gap-2">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center space-x-2">
-                        <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-3 gap-4 pt-4">
-                  {service.stats.map((stat, idx) => (
-                    <div key={idx} className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
-                      <div className="text-sm text-gray-600">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
+            </div>
 
-              {/* Image */}
-              <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-80 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </div>
+            {/* Process Section */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Proven Process</h3>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {['Discovery', 'Planning', 'Implementation', 'Optimization'].map((step, idx) => (
+                  <div key={step} className="text-center">
+                    <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-3">
+                      {idx + 1}
+                    </div>
+                    <h4 className="font-semibold text-gray-900 mb-2">{step}</h4>
+                    <p className="text-sm text-gray-600">
+                      {idx === 0 && 'Understanding your unique requirements and challenges'}
+                      {idx === 1 && 'Creating a strategic roadmap for success'}
+                      {idx === 2 && 'Executing with precision and expertise'}
+                      {idx === 3 && 'Continuous improvement and optimization'}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Bottom CTA */}
-      <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white py-16">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-4">Ready to Transform Your Business?</h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Let's discuss how our enterprise solutions can accelerate your growth and drive innovation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="inline-flex items-center bg-white text-blue-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transform hover:scale-105 transition-all duration-200 shadow-lg">
-              <span>Schedule Consultation</span>
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </button>
-            <button className="inline-flex items-center border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white hover:text-blue-900 transition-all duration-200">
-              <span>View Case Studies</span>
-            </button>
+          {/* Stats Sidebar */}
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold text-gray-900 mb-6">Performance Metrics</h3>
+              <div className="space-y-4">
+                {currentService.stats.map((stat, idx) => (
+                  <div key={idx} className="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg">
+                    <div className="text-3xl font-bold text-blue-600 mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-600">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Card */}
+            <div className="bg-gradient-to-br from-blue-600 to-indigo-600 text-white rounded-2xl p-6">
+              <h3 className="text-xl font-bold mb-3">Ready to Get Started?</h3>
+              <p className="text-blue-100 mb-6 text-sm">
+                Let's discuss how this solution can transform your business operations.
+              </p>
+              <button className="w-full bg-white text-blue-600 py-3 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center justify-center">
+                <span>Schedule Consultation</span>
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

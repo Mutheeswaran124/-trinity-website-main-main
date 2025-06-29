@@ -26,7 +26,7 @@ import ServicesPage from './components/Services/ServicesPage';
 import IndustriesPage from './components/IndustriesPage';
 import MegaMenuServices from './components/MegaMenus/MegaMenuServices';
 
-// HomePage with scroll-to-hash and logo at top
+// HomePage with scroll-to-hash
 const HomePage = () => {
   const location = useLocation();
 
@@ -45,7 +45,7 @@ const HomePage = () => {
     <>
       <Header />
       <main>
-       <Hero />
+        <Hero />
         <TestimonialCard />
         <About />
         <Services />
@@ -67,7 +67,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/our-story" element={<OurStory />} />
         <Route path="/industries" element={<IndustriesPage />} />
-        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services" element={<Services />} /> {/* Optional: main section list */}
+        <Route path="/services/:serviceId" element={<ServicesPage />} /> {/* ✅ Fix: dynamic route */}
         <Route
           path="/services-portal"
           element={

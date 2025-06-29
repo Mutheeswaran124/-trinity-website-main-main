@@ -3,7 +3,7 @@ import { MapPin, Users, Building, Calendar, Globe, Zap, Shield, Cpu } from 'luci
 
 interface TimelinePoint {
   id: string;
-  year: string;
+  establishedYear: string;
   city: string;
   country: string;
   isActive: boolean;
@@ -22,16 +22,11 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
       {/* Timeline Line */}
       <div className="relative">
         <div className="absolute top-6 left-0 right-0 h-0.5 bg-gradient-to-r from-gray-300 via-blue-500 to-gray-300"></div>
-       
+        
         {/* Timeline Points and Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {points.map((point, index) => (
+          {points.map((point) => (
             <div key={point.id} className="relative">
-              {/* Year Label */}
-              <div className="text-center mb-3">
-                <span className="text-xl font-bold text-blue-600">{point.year}</span>
-              </div>
-             
               {/* Timeline Dot */}
               <div className="flex justify-center mb-4">
                 <div
@@ -47,7 +42,7 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
                   )}
                 </div>
               </div>
-             
+              
               {/* Location Card with Country Background */}
               <div
                 className={`relative overflow-hidden rounded-lg border transition-all duration-500 cursor-pointer transform hover:scale-105 ${
@@ -63,13 +58,13 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
                     <img
                       src={point.backgroundImage}
                       alt={`${point.country} background`}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110 image-hd"
                     />
                   )}
-                 
+                  
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                 
+                  
                   {/* City skyline overlay for enhanced visual */}
                   <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/40 to-transparent">
                     <div className="flex items-end justify-center h-full space-x-1 px-3">
@@ -93,8 +88,8 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
                     </div>
                   )}
                 </div>
-               
-                {/* Card Content */}
+                
+                {/* Card Content - Simplified */}
                 <div className={`p-3 transition-all duration-500 ${
                   point.isActive
                     ? 'bg-gradient-to-br from-blue-50 to-indigo-50'
@@ -105,7 +100,7 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
                     <span className="text-lg filter drop-shadow-sm">{point.flag}</span>
                   </div>
                   <p className="text-gray-600 text-xs mb-2">{point.country}</p>
-                 
+                  
                   {/* Active Indicator */}
                   {point.isActive && (
                     <div className="flex items-center space-x-2">
@@ -123,12 +118,18 @@ const Timeline: React.FC<TimelineProps> = ({ points, onPointClick }) => {
   );
 };
 
+// Mock images - replace with your actual HD images
+import texasImg from '../../Assets/texas.jpg'; 
+import chennaiImg from '../../Assets/chennai.jpg';
+import hagueImg from '../../Assets/hague.jpg'
+import muscatImg from '../../Assets/muscat oman.jpg'
+
 const locations = [
   {
     id: 'usa',
     name: 'United States',
     city: 'Plano, Texas',
-    year: '2020',
+    establishedYear: '2020',
     address: '300 Interpace Parkway, Plano, TX',
     coordinates: { lat: 33.019843, lng: -96.698885 },
     employees: '150+',
@@ -137,13 +138,13 @@ const locations = [
     description: 'Our flagship headquarters driving innovation in cloud technologies and AI solutions.',
     specialization: 'Enterprise Solutions',
     flag: '🇺🇸',
-    backgroundImage: 'https://images.pexels.com/photos/2041627/pexels-photo-2041627.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
+    backgroundImage: texasImg,
   },
   {
     id: 'chennai',
     name: 'India',
     city: 'Chennai, Tamil Nadu',
-    year: '2021',
+    establishedYear: '2021',
     address: 'Ambal Nagar, Ekkatuthangal, Chennai - 600044, Tamil Nadu',
     coordinates: { lat: 13.082680, lng: 80.270718 },
     employees: '200+',
@@ -152,13 +153,13 @@ const locations = [
     description: 'Our largest development center focusing on cutting-edge software solutions.',
     specialization: 'Development Hub',
     flag: '🇮🇳',
-    backgroundImage: 'https://images.pexels.com/photos/962464/pexels-photo-962464.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
+    backgroundImage: chennaiImg,
   },
   {
     id: 'oman',
     name: 'Oman',
     city: 'Muscat',
-    year: '2022',
+    establishedYear: '2022',
     address: 'Muscat, Oman',
     coordinates: { lat: 23.58589, lng: 58.40592 },
     employees: '50+',
@@ -167,13 +168,13 @@ const locations = [
     description: 'Strategic Middle East operations center providing regional expertise.',
     specialization: 'Consulting Services',
     flag: '🇴🇲',
-    backgroundImage: 'https://images.pexels.com/photos/3889742/pexels-photo-3889742.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
+    backgroundImage: muscatImg,
   },
   {
     id: 'netherlands',
     name: 'Netherlands',
     city: 'The Hague',
-    year: '2023',
+    establishedYear: '2023',
     address: 'The Hague, Netherlands',
     coordinates: { lat: 52.0704978, lng: 4.3006999 },
     employees: '75+',
@@ -182,7 +183,7 @@ const locations = [
     description: 'European innovation center specializing in financial technology.',
     specialization: 'Fintech Innovation',
     flag: '🇳🇱',
-    backgroundImage: 'https://images.pexels.com/photos/2031706/pexels-photo-2031706.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop'
+    backgroundImage: hagueImg,
   }
 ];
 
@@ -192,7 +193,7 @@ const GlobalPresence = () => {
   const timelinePoints = useMemo(() => {
     return locations.map(l => ({
       id: l.id,
-      year: l.year,
+      establishedYear: l.establishedYear,
       city: l.city,
       country: l.name,
       isActive: l.id === activeLocation,
@@ -262,23 +263,22 @@ const GlobalPresence = () => {
                   <img
                     src={location.backgroundImage}
                     alt={`${location.name} background`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover image-hd"
                   />
                 </div>
-               
+                
                 <div className="relative p-4">
                   <div className="flex items-start justify-between mb-2">
-                    <div>
+                    <div className="flex-1">
                       <h4 className="text-sm font-bold text-gray-900">{location.city}</h4>
                       <p className="text-gray-600 text-xs">{location.name}</p>
                       <p className="text-blue-600 text-xs font-medium mt-1">{location.specialization}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-blue-600 font-semibold text-sm">{location.year}</p>
+                    <div className="text-right ml-2">
                       <p className="text-gray-500 text-xs">{location.employees}</p>
                     </div>
                   </div>
-                 
+                  
                   <div className="flex items-center space-x-2">
                     <div className={`w-2 h-2 rounded-full ${
                       activeLocation === location.id ? 'bg-blue-500 animate-pulse' : 'bg-gray-400'
@@ -298,7 +298,7 @@ const GlobalPresence = () => {
                 <img
                   src={activeOffice.backgroundImage}
                   alt={`${activeOffice.name} background`}
-                  className="w-full h-full object-cover transition-all duration-700 ease-in-out"
+                  className="w-full h-full object-cover transition-all duration-700 ease-in-out image-hd"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/90 to-white/95"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white/90"></div>
@@ -330,16 +330,16 @@ const GlobalPresence = () => {
                         <p className="text-gray-700 text-xs leading-relaxed">{activeOffice.address}</p>
                       </div>
                     </div>
-                   
+                    
                     <div className="flex items-start space-x-3 p-4 rounded-lg bg-white/60 backdrop-blur-sm border border-white/30 shadow-sm">
                       <Calendar className="text-blue-600 mt-1 flex-shrink-0" size={16} />
                       <div>
                         <p className="font-semibold text-gray-900 text-sm">Established</p>
-                        <p className="text-gray-700 text-xs">{activeOffice.year}</p>
+                        <p className="text-gray-700 text-xs">{activeOffice.establishedYear}</p>
                       </div>
                     </div>
                   </div>
-                 
+                  
                   <div className="space-y-3">
                     <div className="flex items-start space-x-3 p-4 rounded-lg bg-white/60 backdrop-blur-sm border border-white/30 shadow-sm">
                       <Users className="text-blue-600 mt-1 flex-shrink-0" size={16} />
@@ -348,7 +348,7 @@ const GlobalPresence = () => {
                         <p className="text-gray-700 text-xs">{activeOffice.employees} professionals</p>
                       </div>
                     </div>
-                   
+                    
                     <div className="flex items-start space-x-3 p-4 rounded-lg bg-white/60 backdrop-blur-sm border border-white/30 shadow-sm">
                       <Building className="text-blue-600 mt-1 flex-shrink-0" size={16} />
                       <div>
@@ -407,8 +407,7 @@ const GlobalPresence = () => {
         </div>
       </div>
 
-      <style jsx >
-        {`
+      <style jsx>{`
         @keyframes spin-slow {
           from {
             transform: rotate(0deg);
@@ -420,9 +419,21 @@ const GlobalPresence = () => {
         .animate-spin-slow {
           animation: spin-slow 8s linear infinite;
         }
+        .image-hd {
+          image-rendering: -webkit-optimize-contrast;
+          image-rendering: crisp-edges;
+          image-rendering: pixelated;
+          image-rendering: high-quality;
+          -webkit-backface-visibility: hidden;
+          -webkit-transform: translateZ(0) scale(1.0, 1.0);
+          transform: translateZ(0);
+          -webkit-filter: blur(0);
+          filter: blur(0);
+        }
       `}</style>
     </div>
   );
 };
 
 export default GlobalPresence;
+

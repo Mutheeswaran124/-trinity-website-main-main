@@ -10,9 +10,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <img src={TrinityLogo} alt="Trinity Logo" className="h-14 w-auto text-white mb-4" />
-            <p className="text-gray-400 mb-4">
-              Empowering data-driven decisions across the globe with innovative analytics solutions.
-            </p>
+          
             <div className="flex space-x-4">
               <a
                 href="https://www.linkedin.com/company/trinity-technology-solutions"
@@ -22,15 +20,7 @@ const Footer = () => {
               >
                 <Linkedin size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                <Instagram size={20} />
-              </a>
+            
             </div>
           </div>
 
@@ -65,16 +55,16 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={20} className="text-blue-500 mr-2 mt-1 flex-shrink-0" />
-                <span className="text-gray-400">Global offices in Oman, Netherlands, USA, and Chennai (India)</span>
+                <span className="text-gray-400">Global offices in USA, India , Oman, and Netharlands</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="text-blue-500 mr-2 flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-gray-400 hover:text-white transition-colors">+1 (234) 567-890</a>
+                <a href="tel:+1234567890" className="text-gray-400 hover:text-white transition-colors">+1 214 206 8558</a>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="text-blue-500 mr-2 flex-shrink-0" />
                 <a href="mailto:info@trinitytechsolutions.com" className="text-gray-400 hover:text-white transition-colors">
-                  info@trinitytechsolutions.com
+                  hello@trinitetech.com
                 </a>
               </li>
             </ul>

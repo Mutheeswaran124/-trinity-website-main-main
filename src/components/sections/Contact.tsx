@@ -1,9 +1,7 @@
 import React, { useRef } from 'react';
-import { Mail, Phone, MessageSquare, Calendar, Send } from 'lucide-react';
+import { Mail, Phone, Calendar, Send } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import contact from '../../animations/contact.lottie?url';
-
-
 
 // Section Component
 const Section: React.FC<{ id: string; title: string; children: React.ReactNode; className?: string }> = ({
@@ -84,18 +82,16 @@ const Contact: React.FC = () => {
           <DotLottieReact src={contact} loop autoplay style={{ width: 210, height: 210 }} />
         </div>
 
-   <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-
-
+        <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
           {/* Contact Information Side */}
           <div className="space-y-8">
-            {/* Email Section */}
             <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-xl">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
                 Contact Information
               </h3>
 
               <div className="space-y-6">
+                {/* Email */}
                 <div className="flex items-start group">
                   <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
                     <Mail size={24} className="text-white" />
@@ -111,41 +107,41 @@ const Contact: React.FC = () => {
                       href="mailto:sales@trinitytechsolutions.com"
                       className="text-blue-600 hover:text-blue-700 font-medium"
                     >
-                      sales@trinitytechsolutions.com
+                      sales@trinitetech.com
                     </a>
                   </div>
                 </div>
 
-                {/* Phone Section */}
-                <div className="flex items-start group">
-                  <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
-                    <Phone size={24} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">Call Us</h4>
-                    <p className="text-gray-600 mb-2">USA Office</p>
-                    <a href="tel:+12345678901" className="text-blue-600 hover:text-blue-700 font-medium">
-                      +1 (234) 567-8901
-                    </a>
-                    <p className="text-gray-600 mt-3 mb-1">Global Support</p>
-                    <a href="tel:+31234567890" className="text-blue-600 hover:text-blue-700 font-medium">
-                      +31 (234) 567-890
-                    </a>
-                  </div>
-                </div>
+                {/* Multi-Country Phone Block */}
+<div className="flex items-start group">
+  <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
+    <Phone size={24} className="text-white" />
+  </div>
+  <div>
+    <h4 className="text-lg font-semibold text-gray-900 mb-1">Call Us</h4>
 
-                {/* Chat Section */}
-                <div className="flex items-start group">
-                  <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
-                    <MessageSquare size={24} className="text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">Live Chat</h4>
-                    <p className="text-gray-600">
-                      Our support team is available Monday through Friday from 9:00 AM to 6:00 PM CET.
-                    </p>
-                  </div>
-                </div>
+    <p className="text-gray-600 mb-2">🇺🇸 USA Office</p>
+    <a href="tel:+12142068558" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+      +1 214-206-8558
+    </a>
+
+    <p className="text-gray-600 mb-2">🇮🇳 India Office</p>
+    <a href="tel:+919791273026" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+      +91 9791273026
+    </a>
+
+    <p className="text-gray-600 mb-2">🇴🇲 Oman Office</p>
+    <a href="tel:+96892416321" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+      +968 92416321
+    </a>
+
+    <p className="text-gray-600 mb-2">🇳🇱 Netherlands Office</p>
+    <a href="tel:+31108990639" className="text-blue-600 hover:text-blue-700 font-medium block">
+      +31 10899 0639
+    </a>
+  </div>
+</div>
+
               </div>
             </div>
 
@@ -287,7 +283,4 @@ const Contact: React.FC = () => {
   );
 };
 
-// App Entry
-const App: React.FC = () => <Contact />;
-
-export default App;
+export default Contact;
