@@ -55,27 +55,29 @@ const Header = () => {
     <>
       <header
 <<<<<<< HEAD
+<<<<<<< HEAD
         className={`fixed w-full z-50 transition-all duration-300 font-sans ${
 =======
         className={`fixed w-full z-50 transition-all duration-300 font-sans -mt-2 ${
 >>>>>>> e44a78a (commit)
+=======
+        className={`fixed w-full z-50 transition-all duration-300 font-sans ${
+>>>>>>> 9cbcf5e (commit)
           isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-3'
         }`}
-        style={{ fontFamily: 'Poppins, sans-serif' }}
+        style={{ fontFamily: 'Poppins, sans-serif', height: '90px' }}
       >
-        {/* Background Blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute -top-32 -right-32 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob" />
           <div className="absolute -bottom-32 -left-32 w-60 h-60 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-2000" />
           <div className="absolute top-20 left-40 w-60 h-60 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-4000" />
         </div>
 
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10">
+        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10 h-full">
           <a href="/" className="flex items-center">
             <img src={TrinityLogo} alt="Trinity Logo" className="h-12 md:h-14 w-auto" />
           </a>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8 ml-auto">
             {navLinks.map((link) => (
               <div
@@ -96,7 +98,6 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Contact Us Button */}
           <a
             href="#contact"
             className="hidden md:inline-block font-semibold bg-blue-600 text-white px-6 py-2 rounded-md transition-colors hover:bg-blue-700 text-base ml-6"
@@ -104,7 +105,6 @@ const Header = () => {
             Contact Us
           </a>
 
-          {/* Mobile Menu Toggle */}
           <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)}>
 <<<<<<< HEAD
             {isOpen ? <X size={28} className="text-blue-600" /> : <Menu size={28} className="text-blue-600" />}
@@ -119,7 +119,6 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mega Menu Overlay */}
       {activeMenu && (
         <div
           className="fixed inset-0 z-40 bg-black bg-opacity-20 backdrop-blur-sm"

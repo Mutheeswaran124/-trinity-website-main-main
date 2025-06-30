@@ -1,212 +1,333 @@
+"use client";
 import React from 'react';
-import { Cloud, Database, Globe, Server, ArrowRight, CheckCircle, Zap, Box, Code, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Cloud, Database, Globe, Server, ArrowRight, CheckCircle, Zap, Box, Code, Layers, BarChart } from 'lucide-react';
 
+interface MegaMenuTechStackProps {
+  onClose?: () => void;
+}
 
-const MegaMenuTechStack = ({ onClose }: { onClose?: () => void }) => {
-  const handleExploreClick = () => {
+const MegaMenuTechStack: React.FC<MegaMenuTechStackProps> = ({ onClose }) => {
+  const handleExploreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (onClose) onClose();
     const section = document.getElementById('tech-stack');
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
-      if (onClose) onClose(); // Close dropdown if parent passes onClose
     }
   };
-
 
   const techCategories = [
     {
       title: 'Cloud & Infrastructure',
       icon: Cloud,
       technologies: [
-        { name: 'Azure', icon: Cloud, color: 'from-blue-500 to-blue-600' },
-        { name: 'AWS', icon: Server, color: 'from-orange-500 to-orange-600' },
-        { name: 'Databricks', icon: Database, color: 'from-red-500 to-red-600' },
-        { name: 'Odoo', icon: Box, color: 'from-purple-500 to-purple-600' }
+        { name: 'Azure', icon: Cloud, color: 'bg-blue-500' },
+        { name: 'AWS', icon: Server, color: 'bg-orange-500' },
+        { name: 'Databricks', icon: Database, color: 'bg-red-500' },
+        { name: 'Odoo', icon: Box, color: 'bg-purple-500' }
       ],
     },
     {
       title: 'Data & Integration',
       icon: Database,
       technologies: [
-        { name: 'DBT', icon: Layers, color: 'from-green-500 to-green-600' },
-        { name: 'FiveTran', icon: Zap, color: 'from-blue-600 to-blue-700' }
+        { name: 'DBT', icon: Layers, color: 'bg-green-500' },
+        { name: 'FiveTran', icon: Zap, color: 'bg-blue-600' }
       ],
     },
     {
       title: 'Web & Frameworks',
       icon: Globe,
       technologies: [
-        { name: 'Next.js', icon: Code, color: 'from-gray-800 to-black' },
-        { name: 'React', icon: Globe, color: 'from-cyan-500 to-cyan-600' }
+        { name: 'Next.js', icon: Code, color: 'bg-gray-800' },
+        { name: 'React', icon: Globe, color: 'bg-cyan-500' }
       ],
     }
   ];
 
-
   return (
-    <div className="relative grid grid-cols-12 gap-6 p-8 bg-gradient-to-br from-slate-50 via-white to-slate-100 backdrop-blur-xl border border-white/20 rounded-3xl shadow-2xl shadow-black/5">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-50/50 via-transparent to-purple-50/30 rounded-3xl pointer-events-none"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
-
-      {/* Left Navigation */}
-      <div className="col-span-4 relative z-10">
-        <div className="mb-6">
-          <h3 className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2 uppercase tracking-wider">Tech Stack</h3>
-          <div className="w-12 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 max-w-7xl mx-auto mt-[-30px]">
+      <div className="relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-gradient-to-br from-purple-400/5 to-pink-400/5 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
-        <div className="space-y-4">
-          {techCategories.map((category, index) => (
-            <div
-              key={category.title}
-              className="group relative p-6 bg-white/60 backdrop-blur-sm rounded-2xl border border-white/30 hover:bg-white/80 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
-              style={{ animationDelay: `${index * 100}ms` }}
+
+        <div className="relative z-10 grid grid-cols-12 gap-8">
+          {/* Left Navigation */}
+          <div className="col-span-4 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-4"
             >
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl blur-lg group-hover:blur-xl transition-all duration-300"></div>
-                  <div className="relative p-3 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
-                    <category.icon className="h-5 w-5 text-white" />
+              <span className="text-blue-600 text-sm font-semibold tracking-wide uppercase">
+                Tech Stack
+              </span>
+              <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+                Technology <span className="text-blue-600">Expertise</span>
+              </h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Building modern applications with <span className="font-semibold text-blue-600">cutting-edge frameworks</span> & cloud solutions.
+              </p>
+            </motion.div>
+            
+            <div className="space-y-4">
+              {techCategories.map((category, index) => (
+                <motion.div
+                  key={category.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  className="group relative overflow-hidden bg-white/80 backdrop-blur-sm border border-gray-100 rounded-xl p-4 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
+                >
+                  <div className="flex items-center space-x-3 mb-3">
+                    <div className="p-2 bg-blue-50 rounded-lg group-hover:scale-110 transition-transform duration-300">
+                      <category.icon className="h-4 w-4 text-blue-600" />
+                    </div>
+                    <h4 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">{category.title}</h4>
                   </div>
-                </div>
-                <h4 className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors duration-300">{category.title}</h4>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                {category.technologies.map((tech, techIndex) => (
-                  <div
-                    key={tech.name}
-                    className="group/tech relative overflow-hidden bg-white/80 backdrop-blur-sm rounded-xl border border-white/40 hover:border-white/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-0.5"
-                    style={{ animationDelay: `${(index * 100) + (techIndex * 50)}ms` }}
-                  >
-                    <div className="flex items-center space-x-3 p-3">
-                      <div className="relative">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${tech.color} rounded-lg blur-sm opacity-20 group-hover/tech:opacity-40 transition-opacity duration-300`}></div>
-                        <div className={`relative p-1.5 bg-gradient-to-br ${tech.color} rounded-lg`}>
+                  <div className="grid grid-cols-2 gap-2">
+                    {category.technologies.map((tech, techIndex) => (
+                      <motion.div
+                        key={tech.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.3 + techIndex * 0.05 }}
+                        className="group/tech flex items-center space-x-2 bg-gray-50 hover:bg-white p-2 rounded-lg transition-all duration-300 hover:shadow-sm"
+                      >
+                        <div className={`p-1 rounded group-hover/tech:scale-110 transition-transform duration-300 ${tech.color}`}>
                           <tech.icon className="h-3 w-3 text-white" />
                         </div>
-                      </div>
-                      <span className="text-xs font-medium text-gray-700 group-hover/tech:text-gray-900 transition-colors duration-300">{tech.name}</span>
-                    </div>
-                    <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/50 to-transparent opacity-0 group-hover/tech:opacity-100 transition-opacity duration-300"></div>
+                        <span className="text-xs font-medium text-gray-700 group-hover/tech:text-gray-900 transition-colors duration-300">{tech.name}</span>
+                      </motion.div>
+                    ))}
                   </div>
+                  
+                  {/* Shimmer effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
+                    animate={{ translateX: ['100%', '100%'] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      repeatDelay: 3,
+                      ease: "linear"
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Center Content */}
+          <div className="col-span-5 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="space-y-4"
+            >
+              <span className="text-purple-600 text-sm font-semibold tracking-wide uppercase">
+                Modern Stack
+              </span>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                Technology <span className="text-purple-600">Excellence</span>
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                Leveraging the latest technologies to build scalable, secure, and high-performance solutions.
+              </p>
+            </motion.div>
+
+            {/* Hero Image with Animation */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative rounded-xl overflow-hidden h-48 bg-gradient-to-br from-purple-900 via-blue-800 to-indigo-900 group"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20" />
+              <img 
+                src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600" 
+                alt="Tech Stack" 
+                className="w-full h-full object-cover mix-blend-overlay opacity-80 transition-transform duration-700 group-hover:scale-105" 
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <motion.div
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{ 
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="mb-2"
+                  >
+                    <Code className="h-12 w-12 mx-auto text-purple-300" />
+                  </motion.div>
+                  <h3 className="text-lg font-bold">Modern Development</h3>
+                </div>
+              </div>
+              
+              {/* Animated particles */}
+              <div className="absolute inset-0">
+                {[...Array(8)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/40 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      opacity: [0, 1, 0],
+                      scale: [0, 1, 0],
+                    }}
+                    transition={{
+                      duration: 2 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: Math.random() * 2,
+                    }}
+                  />
                 ))}
               </div>
+            </motion.div>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {['Scalable Architecture', 'Performance Optimization', 'Security Compliance', 'Cross-platform Compatibility'].map((feature, index) => (
+                <motion.div
+                  key={feature}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                  className="flex items-center space-x-2"
+                >
+                  <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                  <span className="text-sm text-gray-700">{feature}</span>
+                </motion.div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
 
-
-      {/* Center Content */}
-      <div className="col-span-5 px-6 relative z-10">
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 mb-3">Technology Expertise</h2>
-          <p className="text-gray-600/90 leading-relaxed text-lg">Building modern applications with cutting-edge frameworks & cloud solutions.</p>
-        </div>
-       
-        <div className="relative mb-6 overflow-hidden rounded-2xl group">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl"></div>
-          <img
-            src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600"
-            alt="Tech Stack"
-            className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent rounded-2xl"></div>
-        </div>
-       
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          {['Scalable Architecture', 'Performance Optimization', 'Security Compliance', 'Cross-platform Compatibility'].map((feature, index) => (
-            <div
-              key={feature}
-              className="flex items-center space-x-3 p-3 bg-white/50 backdrop-blur-sm rounded-xl border border-white/30 hover:bg-white/70 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/5"
-              style={{ animationDelay: `${index * 100}ms` }}
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex items-center justify-between pt-4"
             >
-              <div className="relative">
-                <div className="absolute inset-0 bg-green-500/20 rounded-full blur-md"></div>
-                <CheckCircle className="relative h-5 w-5 text-green-500" />
-              </div>
-              <span className="text-sm font-medium text-gray-700">{feature}</span>
-            </div>
-          ))}
-        </div>
-       
-        <div className="flex items-center justify-between">
-          <button
-            className="group relative inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3.5 rounded-2xl font-semibold transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5"
-            onClick={handleExploreClick}
-            type="button"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <span className="relative">Explore Tech Stack</span>
-            <ArrowRight className="relative h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-          <div className="flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200/50">
-            <div className="relative">
-              <div className="absolute inset-0 bg-yellow-500/20 rounded-full blur-sm"></div>
-              <CheckCircle className="relative h-5 w-5 text-yellow-500" />
-            </div>
-            <span className="text-sm font-semibold text-yellow-700">Latest Technologies</span>
-          </div>
-        </div>
-      </div>
-
-
-      {/* Right Sidebar */}
-      <div className="col-span-3 space-y-6 relative z-10">
-        <div className="relative p-6 bg-gradient-to-br from-white/70 to-white/50 backdrop-blur-sm rounded-2xl border border-white/30 shadow-xl shadow-black/5">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-t-2xl"></div>
-          <h3 className="text-sm font-bold text-gray-900 mb-6 flex items-center">
-            <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-purple-600 rounded-full mr-4"></div>
-            Certifications
-          </h3>
-          <div className="space-y-4">
-            {[
-              { name: 'AWS Certified', icon: Server, color: 'from-orange-500 to-orange-600' },
-              { name: 'Google Cloud Professional', icon: Cloud, color: 'from-blue-500 to-blue-600' },
-              { name: 'Microsoft Azure Expert', icon: Cloud, color: 'from-blue-600 to-blue-700' },
-         
-            ].map((cert, index) => (
-              <div
-                key={cert.name}
-                className="group/cert flex items-center space-x-4 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-white/40 hover:bg-white/90 hover:border-white/60 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/5 hover:-translate-y-0.5"
-                style={{ animationDelay: `${index * 100}ms` }}
+              <motion.button
+                onClick={handleExploreClick}
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group"
+                type="button"
               >
-                <div className="relative">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${cert.color} rounded-xl blur-lg opacity-20 group-hover/cert:opacity-40 transition-opacity duration-300`}></div>
-                  <div className={`relative p-2.5 bg-gradient-to-br ${cert.color} rounded-xl`}>
-                    <cert.icon className="h-4 w-4 text-white" />
-                  </div>
+                <div className="relative z-10 flex items-center space-x-2">
+                  <span>Explore Tech Stack</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
-                <span className="text-sm font-semibold text-gray-900 group-hover/cert:text-blue-700 transition-colors duration-300">{cert.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-
-        <div className="relative p-6 bg-gradient-to-br from-white/70 to-white/50 backdrop-blur-sm rounded-2xl border border-white/30 shadow-xl shadow-black/5">
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 via-teal-500 to-green-500 rounded-t-2xl"></div>
-          <h4 className="text-sm font-bold text-gray-900 mb-6 flex items-center">
-            <div className="w-1 h-6 bg-gradient-to-b from-green-500 to-teal-500 rounded-full mr-4"></div>
-            Tech Stats
-          </h4>
-          <div className="space-y-4">
-            {[
-              { label: 'Languages', value: '15+' },
-              { label: 'Frameworks', value: '25+' },
-              { label: 'Cloud Platforms', value: '5+' },
-              { label: 'Years of Experience', value: '10+' }
-            ].map((stat, index) => (
-              <div
-                key={stat.label}
-                className="flex justify-between items-center p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-white/30 hover:bg-white/80 transition-all duration-300"
-                style={{ animationDelay: `${index * 50}ms` }}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Shimmer effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
+                  animate={{ translateX: ['100%', '100%'] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                    ease: "linear"
+                  }}
+                />
+              </motion.button>
+              
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200/50"
               >
-                <span className="text-sm font-medium text-gray-600">{stat.label}</span>
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 text-lg">{stat.value}</span>
+                <CheckCircle className="h-4 w-4 text-yellow-500" />
+                <span className="text-sm font-semibold text-yellow-700">Latest Technologies</span>
+              </motion.div>
+            </motion.div>
+          </div>
+
+          {/* Right Sidebar */}
+          <div className="col-span-3 space-y-6">
+            {/* Certifications */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-blue-50 rounded-xl p-5 border-l-4 border-blue-500"
+            >
+              <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <Server className="h-5 w-5 text-blue-600 mr-2" />
+                Certifications
+              </h3>
+              <div className="space-y-3">
+                {[
+                  { name: 'AWS Certified', icon: Server, color: 'bg-orange-500' },
+                  { name: 'Google Cloud Professional', icon: Cloud, color: 'bg-blue-500' },
+                  { name: 'Microsoft Azure Expert', icon: Cloud, color: 'bg-blue-600' },
+                ].map((cert, index) => (
+                  <motion.div
+                    key={cert.name}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                    className="flex items-center space-x-3 p-2 rounded-lg hover:bg-white/50 transition-colors"
+                  >
+                    <div className={`p-1.5 rounded-lg ${cert.color}`}>
+                      <cert.icon className="h-3 w-3 text-white" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700">{cert.name}</span>
+                  </motion.div>
+                ))}
               </div>
-            ))}
+            </motion.div>
+
+            {/* Tech Stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="bg-green-50 rounded-xl p-5 border-l-4 border-green-500"
+            >
+              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <BarChart className="h-5 w-5 text-green-600 mr-2" />
+                Tech Stats
+              </h4>
+              <div className="space-y-3">
+                {[
+                  { label: 'Languages', value: '15+', color: 'text-blue-600' },
+                  { label: 'Frameworks', value: '25+', color: 'text-purple-600' },
+                  { label: 'Cloud Platforms', value: '5+', color: 'text-green-600' },
+                  { label: 'Years of Experience', value: '10+', color: 'text-orange-600' }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                    className="flex justify-between items-center p-2 rounded-lg hover:bg-white/50 transition-colors"
+                  >
+                    <span className="text-sm text-gray-700">{stat.label}</span>
+                    <span className={`font-bold text-sm ${stat.color}`}>
+                      {stat.value}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -214,6 +335,4 @@ const MegaMenuTechStack = ({ onClose }: { onClose?: () => void }) => {
   );
 };
 
-
 export default MegaMenuTechStack;
-

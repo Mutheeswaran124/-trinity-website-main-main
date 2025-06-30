@@ -1,7 +1,7 @@
+"use client";
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Users, Target, Award, Globe, Building, TrendingUp, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-
 
 const partners = [
   { name: 'AWS', href: '#aws', logo: 'https://download.logo.wine/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.png' },
@@ -11,7 +11,6 @@ const partners = [
   { name: 'Fivetran', href: '#fivetran', logo: 'https://images.icon-icons.com/2699/PNG/512/fivetran_logo_icon_170149.png' },
   { name: 'dbt Labs', href: '#dbt', logo: 'https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png' },
 ];
-
 
 const highlights = [
   {
@@ -44,90 +43,122 @@ const highlights = [
   },
 ];
 
-
 const MegaMenuAbout = () => {
-  const navigate = useNavigate();
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-sm">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
-
-
-      <div className="relative z-10 grid grid-cols-9 gap-8 p-8">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 max-w-7xl mx-auto mt-[-30px]">
+      <div className="grid grid-cols-9 gap-8">
         {/* Left Section - Company Overview */}
         <div className="col-span-3 space-y-6">
-          <div className="space-y-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-medium">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
+          >
+            <span className="text-blue-600 text-sm font-semibold tracking-wide uppercase">
               About Trinity
-            </div>
-            <h3 className="text-3xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent leading-tight">
-              Why Trinity Technology Solutions?
+            </span>
+            <h3 className="text-2xl font-bold text-gray-900 leading-tight">
+              Why Trinity Technology <span className="text-blue-600">Solutions?</span>
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               Empowering businesses with cutting-edge <span className="font-semibold text-blue-600">data engineering, analytics, and AI solutions</span>.
             </p>
-          </div>
+          </motion.div>
          
-          <div className="space-y-4">
+          <div className="space-y-3">
             {[
-              { icon: Target, text: 'Founded in 2020', color: 'text-emerald-600' },
-              { icon: Award, text: 'Databricks Official Partner', color: 'text-purple-600' },
-              { icon: Building, text: 'Global Presence in 4+ Continent', color: 'text-blue-600' }
+              { icon: Target, text: 'Founded in 2020', color: 'bg-emerald-500' },
+              { icon: Award, text: 'Databricks Official Partner', color: 'bg-purple-500' },
+              { icon: Building, text: 'Global Presence in 4+ Continent', color: 'bg-blue-500' }
             ].map((item, index) => (
-              <div key={index} className="group flex items-center space-x-4 p-3 rounded-xl hover:bg-white/60 transition-all duration-300 hover:shadow-md">
-                <div className={`p-2 rounded-lg bg-gradient-to-br from-white to-gray-50 shadow-sm group-hover:shadow-md transition-all duration-300`}>
-                  <item.icon className={`h-5 w-5 ${item.color}`} />
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-center space-x-4 p-3 rounded-xl hover:bg-gray-50 transition-all duration-300 cursor-pointer group"
+              >
+                <div className={`p-2 rounded-lg group-hover:scale-110 transition-transform ${item.color}`}>
+                  <item.icon className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">{item.text}</span>
-              </div>
+                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                  {item.text}
+                </span>
+              </motion.div>
             ))}
           </div>
         </div>
-
 
         {/* Center Section - Technology Partners */}
         <div className="col-span-3 space-y-6">
-          <div className="space-y-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <span className="text-purple-600 text-sm font-semibold tracking-wide uppercase">
               Technology Partners
-            </div>
+            </span>
             <h3 className="text-xl font-bold text-gray-900">Trusted Partnerships</h3>
-          </div>
+          </motion.div>
          
-          <div className="grid grid-cols-2 gap-3">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid grid-cols-2 gap-3"
+          >
             {partners.map((partner, index) => (
-              <div key={partner.name} className="group relative overflow-hidden bg-white/80 backdrop-blur-sm border border-gray-100 rounded-xl p-4 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1">
-                <div className="flex items-center space-x-3">
-                  <div className="relative">
-                    <img src={partner.logo} alt={partner.name} className="h-8 w-8 object-contain transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 rounded-lg transition-all duration-300"></div>
-                  </div>
-                  <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">{partner.name}</span>
+              <motion.a
+                key={partner.name}
+                href={partner.href}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                className="flex items-center space-x-3 p-4 bg-gray-50 rounded-xl hover:bg-white hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-purple-200 group"
+              >
+                <div className="relative">
+                  <img 
+                    src={partner.logo} 
+                    alt={partner.name} 
+                    className="h-6 w-6 object-contain transition-transform duration-300 group-hover:scale-110" 
+                  />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </div>
+                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
+                  {partner.name}
+                </span>
+              </motion.a>
             ))}
-          </div>
+          </motion.div>
         </div>
-
 
         {/* Right Section - Impact Metrics */}
         <div className="col-span-3 space-y-6">
-          <div className="space-y-4">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-medium">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="space-y-4"
+          >
+            <span className="text-emerald-600 text-sm font-semibold tracking-wide uppercase">
               Our Impact
-            </div>
+            </span>
             <h3 className="text-xl font-bold text-gray-900">Measurable Results</h3>
-          </div>
+          </motion.div>
          
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {highlights.map((highlight, index) => (
-              <div
+              <motion.div
                 key={highlight.label}
-                className="group relative overflow-hidden rounded-2xl min-h-[140px] cursor-pointer transition-all duration-500 hover:scale-105"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
+                className="relative overflow-hidden rounded-xl min-h-[120px] cursor-pointer transition-all duration-300 group"
                 style={{
                   backgroundImage: `url('${highlight.image}')`,
                   backgroundSize: 'cover',
@@ -135,45 +166,81 @@ const MegaMenuAbout = () => {
                 }}
               >
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 group-hover:from-black/70 group-hover:via-black/50 group-hover:to-black/70 transition-all duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/60 group-hover:from-black/70 group-hover:via-black/50 group-hover:to-black/70 transition-all duration-300" />
                
                 {/* Content */}
                 <div className="relative z-10 p-4 h-full flex flex-col justify-end">
                   <div className="flex items-center space-x-2 mb-2">
-                    <div className="p-1.5 bg-white/20 backdrop-blur-sm rounded-lg">
-                      <highlight.icon className="h-4 w-4 text-white" />
+                    <div className="p-1.5 bg-white/20 backdrop-blur-sm rounded-lg group-hover:bg-white/30 transition-colors">
+                      <highlight.icon className="h-3 w-3 text-white" />
                     </div>
-                    <div className="text-2xl font-bold text-white">{highlight.number}</div>
+                    <div className="text-xl font-bold text-white">{highlight.number}</div>
                   </div>
-                  <p className="text-sm font-semibold text-white/90">{highlight.label}</p>
+                  <p className="text-xs font-semibold text-white/90">{highlight.label}</p>
                 </div>
                
-                {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/20 group-hover:to-purple-500/20 transition-all duration-300"></div>
-              </div>
+                {/* Animated particles */}
+                <div className="absolute inset-0">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-white/30 rounded-full"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        opacity: [0, 1, 0],
+                        scale: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 2 + Math.random() * 2,
+                        repeat: Infinity,
+                        delay: Math.random() * 2,
+                      }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-
         {/* Call-to-Action */}
         <div className="col-span-9 flex justify-center mt-8">
-          <button
-            onClick={() => navigate('/our-story')}
-            className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1"
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group"
           >
             <div className="relative z-10 flex items-center space-x-3">
               <span>Learn More About Us</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-          </button>
+            
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Shimmer effect */}
+          <motion.div
+  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
+  animate={{ translateX: ['-100%', '100%'] }}
+  transition={{
+    duration: 2,
+    repeat: Infinity,
+    repeatDelay: 3,
+    ease: "linear"
+  }}
+/>
+
+          </motion.button>
         </div>
       </div>
     </div>
   );
 };
-
 
 export default MegaMenuAbout;
