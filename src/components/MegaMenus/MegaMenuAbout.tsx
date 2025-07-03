@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Users, Target, Award, Globe, Building, TrendingUp } from 'lucide-react';
+import { Users, Target, Award, Globe, Building, TrendingUp, Linkedin, ExternalLink, UserPlus } from 'lucide-react';
 
 const partners = [
   { name: 'AWS', href: '#aws', logo: 'https://download.logo.wine/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.png' },
   { name: 'Azure', href: '#azure', logo: 'https://www.svgrepo.com/show/303372/azure-1-logo.svg' },
   { name: 'Databricks', href: '#databricks', logo: 'https://images.seeklogo.com/logo-png/61/1/databricks-icon-logo-png_seeklogo-611588.png' },
-{ name: 'L&T', href: '#lt', logo: 'https://i.pinimg.com/736x/6d/40/8f/6d408fbeb3e7409c124688364f0b4b42.jpg'}
- 
+  { name: 'L&T', href: '#lt', logo: 'https://i.pinimg.com/736x/6d/40/8f/6d408fbeb3e7409c124688364f0b4b42.jpg'}
 ];
 
 const highlights = [
@@ -43,9 +42,13 @@ const highlights = [
 ];
 
 const MegaMenuAbout = () => {
+  const handleLinkedInClick = () => {
+    window.open('https://www.linkedin.com/company/trinity-technology-solutions/posts/?feedView=all', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-lg p-8 max-w-7xl mx-auto mt-[-52px]">
-  <div className="grid grid-cols-9 gap-8">
+      <div className="grid grid-cols-9 gap-8">
         {/* Left Section - Company Overview */}
         <div className="col-span-3 space-y-6">
           <motion.div
@@ -94,7 +97,7 @@ const MegaMenuAbout = () => {
           </div>
         </div>
 
-        {/* Center Section - Technology Partners */}
+        {/* Center Section - Technology Partners & LinkedIn */}
         <div className="col-span-3 space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -136,6 +139,94 @@ const MegaMenuAbout = () => {
                 </span>
               </motion.a>
             ))}
+          </motion.div>
+
+          {/* LinkedIn Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-8 space-y-4"
+          >
+            <span className="text-blue-600 text-sm font-semibold tracking-wide uppercase">
+              Connect With Us
+            </span>
+            <h3 className="text-xl font-bold text-gray-900">Stay Connected</h3>
+            
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2 }}
+              onClick={handleLinkedInClick}
+              className="relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 p-6 cursor-pointer group transition-all duration-300 hover:shadow-xl"
+            >
+              {/* Animated background pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-white rounded-full blur-xl group-hover:scale-110 transition-transform duration-700"></div>
+                <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white rounded-full blur-xl group-hover:scale-110 transition-transform duration-700"></div>
+              </div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-white/20 backdrop-blur-sm rounded-lg group-hover:bg-white/30 transition-colors">
+                      <Linkedin className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white">Follow us on LinkedIn</h4>
+                      <p className="text-blue-100 text-sm">Join our professional network</p>
+                    </div>
+                  </div>
+                  <ExternalLink className="h-4 w-4 text-white/70 group-hover:text-white transition-colors" />
+                </div>
+                
+                <div className="flex items-center space-x-4 text-sm text-blue-100">
+                  <div className="flex items-center space-x-1">
+                    <UserPlus className="h-4 w-4" />
+                    <span>Trinity Technology Solutions</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Globe className="h-4 w-4" />
+                    <span>Global Network</span>
+                  </div>
+                </div>
+                
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="mt-4 inline-flex items-center space-x-2 text-white font-medium group-hover:text-blue-50 transition-colors"
+                >
+                  <span>Connect Now</span>
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </motion.div>
+                </motion.div>
+              </div>
+              
+              {/* Floating particles */}
+              <div className="absolute inset-0">
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white/40 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      opacity: [0, 1, 0],
+                      scale: [0, 1, 0],
+                      y: [0, -10, 0],
+                    }}
+                    transition={{
+                      duration: 3 + Math.random() * 2,
+                      repeat: Infinity,
+                      delay: Math.random() * 2,
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
