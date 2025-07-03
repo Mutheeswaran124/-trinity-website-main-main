@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
-import { Mail, Phone, Calendar, Send } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Mail, Phone, Calendar, Send, X } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import contact from '../../animations/contact.lottie?url';
+import emailjs from '@emailjs/browser';
 
 // Section Component
 const Section: React.FC<{ id: string; title: string; children: React.ReactNode; className?: string }> = ({
@@ -21,12 +22,22 @@ const Section: React.FC<{ id: string; title: string; children: React.ReactNode; 
 );
 
 // Button Component
-const Button: React.FC<{
+type ButtonProps = {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
   className?: string;
   type?: 'button' | 'submit' | 'reset';
-}> = ({ children, variant = 'primary', className = '', type = 'button', ...props }) => {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  className = '',
+  type = 'button',
+  onClick,
+  ...props
+}) => {
   const baseClasses =
     'inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
@@ -38,7 +49,12 @@ const Button: React.FC<{
   };
 
   return (
-    <button type={type} className={`${baseClasses} ${variants[variant]} ${className}`} {...props}>
+    <button
+      type={type}
+      className={`${baseClasses} ${variants[variant]} ${className}`}
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
@@ -46,30 +62,84 @@ const Button: React.FC<{
 
 const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [showCalendly, setShowCalendly] = useState(false);
+  const [showClose, setShowClose] = useState(true);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const form = formRef.current;
     if (!form) return;
 
-    const name = (form.elements.namedItem('name') as HTMLInputElement)?.value || '';
-    const email = (form.elements.namedItem('email') as HTMLInputElement)?.value || '';
-    const company = (form.elements.namedItem('company') as HTMLInputElement)?.value || '';
-    const subject = (form.elements.namedItem('subject') as HTMLInputElement)?.value || '';
-    const message = (form.elements.namedItem('message') as HTMLTextAreaElement)?.value || '';
+    setIsLoading(true);
+    setStatusMessage('');
 
-    const mailto = `mailto:agil.george@trintech?subject=${encodeURIComponent(
-      subject || 'Contact Form Submission'
-    )}&body=${encodeURIComponent(
-      `Full Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`
-    )}`;
-
-    window.location.href = mailto;
+    try {
+      const result = await emailjs.sendForm(
+        'service_3z01v3t',
+        'template_5pv3vhp',
+        form,
+        'OOzmxXaJq7gfK2GU_'
+      );
+      console.log('Email sent successfully:', result.text);
+      setStatusMessage("✅ Message sent successfully! We'll get back to you soon.");
+      form.reset();
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setStatusMessage("❌ Failed to send message. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const handleBookMeeting = () => {
+    setShowCalendly(true); // 2. Show Calendly widget
+  };
+
+  useEffect(() => {
+    if (showCalendly) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      document.body.appendChild(script);
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, [showCalendly]);
+
+  useEffect(() => {
+    if (!showCalendly) return;
+
+    // Handler for Calendly widget events
+    const handleCalendlyMessage = (event: MessageEvent) => {
+      if (
+        event.origin === 'https://calendly.com' &&
+        event.data.event
+      ) {
+        // Hide X when scheduling page is open (date/time picker)
+        if (event.data.event === 'calendly.date_and_time_selected') {
+          setShowClose(false);
+        }
+        // Show X when returning to main page or after scheduling
+        if (
+          event.data.event === 'calendly.profile_page_viewed' ||
+          event.data.event === 'calendly.event_type_viewed' ||
+          event.data.event === 'calendly.event_scheduled'
+        ) {
+          setShowClose(true);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleCalendlyMessage);
+    return () => window.removeEventListener('message', handleCalendlyMessage);
+  }, [showCalendly]);
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
-      {/* Animated background blobs */}
+      {/* Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob" />
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000" />
@@ -77,13 +147,12 @@ const Contact: React.FC = () => {
       </div>
 
       <Section id="contact" title="Get in Touch" className="relative z-10">
-        {/* Lottie Animation */}
         <div className="flex justify-center mb-12">
           <DotLottieReact src={contact} loop autoplay style={{ width: 210, height: 210 }} />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-          {/* Contact Information Side */}
+          {/* LEFT - Contact Info */}
           <div className="space-y-8">
             <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-xl">
               <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-8">
@@ -103,49 +172,41 @@ const Contact: React.FC = () => {
                       hello@trinitetech.com
                     </a>
                     <p className="text-gray-600 mt-3 mb-1">Business Development</p>
-                    <a
-                      href="mailto:sales@trinitytechsolutions.com"
-                      className="text-blue-600 hover:text-blue-700 font-medium"
-                    >
+                    <a href="mailto:sales@trinitetech.com" className="text-blue-600 hover:text-blue-700 font-medium">
                       sales@trinitetech.com
                     </a>
                   </div>
                 </div>
 
-                {/* Multi-Country Phone Block */}
-<div className="flex items-start group">
-  <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
-    <Phone size={24} className="text-white" />
-  </div>
-  <div>
-    <h4 className="text-lg font-semibold text-gray-900 mb-1">Call Us</h4>
-
-    <p className="text-gray-600 mb-2">🇺🇸 USA Office</p>
-    <a href="tel:+12142068558" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
-      +1 214-206-8558
-    </a>
-
-    <p className="text-gray-600 mb-2">🇮🇳 India Office</p>
-    <a href="tel:+919791273026" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
-      +91 9791273026
-    </a>
-
-    <p className="text-gray-600 mb-2">🇴🇲 Oman Office</p>
-    <a href="tel:+96892416321" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
-      +968 92416321
-    </a>
-
-    <p className="text-gray-600 mb-2">🇳🇱 Netherlands Office</p>
-    <a href="tel:+31108990639" className="text-blue-600 hover:text-blue-700 font-medium block">
-      +31 10899 0639
-    </a>
-  </div>
-</div>
-
+                {/* Phones */}
+                <div className="flex items-start group">
+                  <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-xl mr-4 shadow-lg group-hover:scale-105 transition-transform">
+                    <Phone size={24} className="text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-1">Call Us</h4>
+                    <p className="text-gray-600 mb-2"><span role="img" aria-label="USA">🇺🇸</span> USA Office</p>
+                    <a href="tel:+12142068558" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+                      +1 214-206-8558
+                    </a>
+                    <p className="text-gray-600 mb-2"><span role="img" aria-label="India">🇮🇳</span> India Office</p>
+                    <a href="tel:+919791273026" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+                      +91 9791273026
+                    </a>
+                    <p className="text-gray-600 mb-2"><span role="img" aria-label="Oman">🇴🇲</span> Oman Office</p>
+                    <a href="tel:+96892416321" className="text-blue-600 hover:text-blue-700 font-medium block mb-3">
+                      +968 92416321
+                    </a>
+                    <p className="text-gray-600 mb-2"><span role="img" aria-label="Netherlands">🇳🇱</span> Netherlands Office</p>
+                    <a href="tel:+31108990639" className="text-blue-600 hover:text-blue-700 font-medium block">
+                      +31 10899 0639
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Meeting Booking */}
+            {/* Consultation Booking */}
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-xl">
               <div className="flex items-center mb-4">
                 <div className="bg-gradient-to-br from-orange-500 to-pink-500 p-3 rounded-xl mr-4 shadow-lg">
@@ -156,42 +217,65 @@ const Contact: React.FC = () => {
               <p className="text-gray-600 mb-6">
                 Book a free 30-minute consultation with one of our data experts to discuss your project.
               </p>
-              <Button variant="primary" className="w-full">
+              <Button variant="primary" className="w-full" onClick={handleBookMeeting}>
                 <Calendar size={18} className="mr-2" />
                 Book a Meeting
               </Button>
+              {/* 3. Calendly Inline Widget */}
+              {showCalendly && (
+                <div className="mt-8">
+                  <div
+                    className="calendly-inline-widget"
+                    data-url="https://calendly.com/agil-george-trinitetech/30min"
+                    style={{ minWidth: '320px', height: '700px' }}
+                  ></div>
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Contact Form Side */}
+          {/* RIGHT - Form */}
           <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 border border-white/20 shadow-xl">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-8">
               Send Us a Message
             </h3>
 
+            {/* Status */}
+            {statusMessage && (
+              <div
+                className={`mb-4 p-4 rounded-md text-sm font-medium ${
+                  statusMessage.includes('successfully')
+                    ? 'bg-green-100 text-green-800 border border-green-300'
+                    : 'bg-red-100 text-red-800 border border-red-300'
+                }`}
+              >
+                {statusMessage}
+              </div>
+            )}
+
             <form className="space-y-6" ref={formRef} onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="from_name" className="block text-sm font-semibold text-gray-700 mb-2">
                     Full Name *
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="from_name"
+                    name="from_name"
                     required
                     className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500"
                     placeholder="John Doe"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="from_email" className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address *
                   </label>
                   <input
                     type="email"
-                    id="email"
-                    name="email"
+                    id="from_email"
+                    name="from_email"
                     required
                     className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500"
                     placeholder="john@example.com"
@@ -201,13 +285,12 @@ const Contact: React.FC = () => {
 
               <div>
                 <label htmlFor="company" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Company *
+                  Company
                 </label>
                 <input
                   type="text"
                   id="company"
                   name="company"
-                  required
                   className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500"
                   placeholder="Your Company"
                 />
@@ -215,12 +298,13 @@ const Contact: React.FC = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Subject
+                  Subject *
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
+                  required
                   className="w-full px-4 py-3 bg-white/50 border border-white/30 rounded-xl focus:ring-2 focus:ring-blue-500"
                   placeholder="How can we help you?"
                 />
@@ -240,9 +324,11 @@ const Contact: React.FC = () => {
                 />
               </div>
 
+              <input type="hidden" name="to_email" value="hello@trinitetech.com" />
+
               <Button variant="primary" className="w-full text-lg py-4" type="submit">
                 <Send size={20} className="mr-2" />
-                Send Message
+                {isLoading ? 'Sending...' : 'Send Message'}
               </Button>
 
               <p className="text-center text-sm text-gray-500 mt-4">
@@ -253,8 +339,34 @@ const Contact: React.FC = () => {
         </div>
       </Section>
 
-      {/* Keyframe Animation */}
-      <style jsx>{`
+      {/* Calendly Modal */}
+      {showCalendly && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-xl mx-4 p-0">
+            {/* Close Button - only show when showClose is true */}
+            {showClose && (
+              <button
+                className="absolute top-20 left-6 text-gray-500 hover:text-gray-800 z-10"
+                onClick={() => setShowCalendly(false)}
+                aria-label="Close"
+              >
+                <X size={28} />
+              </button>
+            )}
+            {/* Calendly Widget */}
+            <div className="p-0">
+              <div
+                className="calendly-inline-widget"
+                data-url="https://calendly.com/agil-george-trinitetech/30min"
+                style={{ minWidth: '320px', height: '700px' }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Animations */}
+      <style>{`
         @keyframes blob {
           0% {
             transform: translate(0px, 0px) scale(1);

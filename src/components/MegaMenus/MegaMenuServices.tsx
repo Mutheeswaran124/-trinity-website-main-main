@@ -1,3 +1,5 @@
+
+
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -93,12 +95,24 @@ const serviceHighlights = [
 
 interface MegaMenuServicesProps {
   onClose?: () => void;
+  onGetStarted?: () => void;
 }
 
-const MegaMenuServices: React.FC<MegaMenuServicesProps> = ({ onClose }) => {
+const MegaMenuServices: React.FC<MegaMenuServicesProps> = ({ onClose, onGetStarted }) => {
   const handleGetStartedClick = () => {
     if (onClose) onClose();
-    console.log('Get Started clicked');
+    
+    // Smooth scroll to services section
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    
+    // Call the callback if provided
+    if (onGetStarted) onGetStarted();
   };
 
   const handleConsultationClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -160,16 +174,17 @@ const MegaMenuServices: React.FC<MegaMenuServicesProps> = ({ onClose }) => {
                   </div>
                   
                   {/* Shimmer effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                    animate={{ translateX: ['100%', '100%'] }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      repeatDelay: 3,
-                      ease: "linear"
-                    }}
-                  />
+                     <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+    initial={{ x: '-100%' }}
+    animate={{ x: '100%' }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 3,
+      ease: "linear",
+    }}
+  />
                 </motion.div>
               ))}
             </div>
@@ -289,17 +304,18 @@ const MegaMenuServices: React.FC<MegaMenuServicesProps> = ({ onClose }) => {
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 {/* Shimmer effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                  animate={{ translateX: ['100%', '100%'] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 3,
-                    ease: "linear"
-                  }}
-                />
-              </motion.button>
+               <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+    initial={{ x: '-100%' }}
+    animate={{ x: '100%' }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 3,
+      ease: "linear",
+    }}
+  />
+</motion.button>
               
               <motion.a
                 href="#consultation"
@@ -307,8 +323,8 @@ const MegaMenuServices: React.FC<MegaMenuServicesProps> = ({ onClose }) => {
                 whileHover={{ scale: 1.02 }}
                 className="text-blue-600 font-semibold hover:text-blue-700 transition-colors flex items-center space-x-1 text-sm"
               >
-                <span>Free Consultation</span>
-                <ArrowRight className="h-3 w-3" />
+               
+             
               </motion.a>
             </motion.div>
           </div>

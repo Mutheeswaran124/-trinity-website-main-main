@@ -12,7 +12,7 @@ const TechStack = () => {
   const technologies = [
     {
       name: 'Azure',
-      logo: 'https://cdn.worldvectorlogo.com/logos/azure-1.svg', // Updated logo URL
+      logo: 'https://cdn.worldvectorlogo.com/logos/azure-1.svg',
       description: 'Cloud computing services for scalable, enterprise-grade solutions',
       gradient: 'from-blue-400 to-cyan-400',
       shadow: 'shadow-blue-500/25',
@@ -58,6 +58,27 @@ const TechStack = () => {
       description: 'Open-source business management software for ERP, CRM, accounting, e-commerce, inventory, and more.',
       gradient: 'from-purple-400 to-pink-400',
       shadow: 'shadow-purple-500/25',
+    },
+    {
+      name: 'Java',
+      logo: 'https://cdn.worldvectorlogo.com/logos/java.svg',
+      description: 'Enterprise-grade programming language for building robust, scalable applications.',
+      gradient: 'from-red-500 to-orange-500',
+      shadow: 'shadow-red-500/25',
+    },
+    {
+      name: 'Oracle',
+      logo: 'https://cdn.worldvectorlogo.com/logos/oracle-6.svg',
+      description: 'Industry-leading database management system for mission-critical enterprise data.',
+      gradient: 'from-red-600 to-red-500',
+      shadow: 'shadow-red-500/25',
+    },
+    {
+      name: 'SAP',
+      logo: 'https://cdn.worldvectorlogo.com/logos/sap.svg',
+      description: 'Enterprise resource planning software for streamlined business operations.',
+      gradient: 'from-blue-500 to-indigo-500',
+      shadow: 'shadow-blue-500/25',
     },
   ];
 
@@ -122,46 +143,46 @@ const TechStack = () => {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23E5E7EB%22 fill-opacity=%220.3%22%3E%3Ccircle cx=%2230%22 cy=%2230%22 r=%221.5%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-40"></div>
       </div>
 
-     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4 relative z-10 mb-16">
-  {technologies.map((tech, index) => (
-    <Card3D key={index} containerClassName="h-64 w-full"> {/* ⬅️ Updated height */}
-      <div className="group relative h-full w-full rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src={tech.logo}
-            alt={`${tech.name} background`}
-            className="w-36 h-36 object-contain filter blur-2xl opacity-20 scale-150 group-hover:opacity-30 transition-opacity duration-500"
-          />
-        </div>
-        <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow duration-500"></div>
-        <div className="relative h-full p-4 flex flex-col items-center justify-center text-center z-10">
-          <div className="relative mb-3 group-hover:transform group-hover:scale-110 transition-transform duration-500">
-            <div className="relative flex items-center justify-center h-16 w-16 mx-auto">
-              <img
-                src={tech.logo}
-                alt={`${tech.name} logo`}
-                className="h-full w-full object-contain group-hover:drop-shadow-lg transition-all duration-500"
-              />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 relative z-10 mb-16">
+        {technologies.map((tech, index) => (
+          <Card3D key={index} containerClassName="h-64 w-full">
+            <div className="group relative h-full w-full rounded-2xl overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <img
+                  src={tech.logo}
+                  alt={`${tech.name} background`}
+                  className="w-36 h-36 object-contain filter blur-2xl opacity-20 scale-150 group-hover:opacity-30 transition-opacity duration-500"
+                />
+              </div>
+              <div className={`absolute inset-0 bg-gradient-to-br ${tech.gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-500`}></div>
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl shadow-md group-hover:shadow-lg transition-shadow duration-500"></div>
+              <div className="relative h-full p-4 flex flex-col items-center justify-center text-center z-10">
+                <div className="relative mb-3 group-hover:transform group-hover:scale-110 transition-transform duration-500">
+                  <div className="relative flex items-center justify-center h-16 w-16 mx-auto">
+                    <img
+                      src={tech.logo}
+                      alt={`${tech.name} logo`}
+                      className="h-full w-full object-contain group-hover:drop-shadow-lg transition-all duration-500"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500">
+                  {tech.name}
+                </h3>
+                <p className="text-xs text-gray-600 leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-3">
+                  {tech.description}
+                </p>
+                <div className={`absolute inset-0 rounded-2xl ${tech.shadow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}></div>
+              </div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute top-2 left-2 w-1 h-1 bg-blue-400/60 rounded-full animate-ping"></div>
+                <div className="absolute top-3 right-3 w-0.5 h-0.5 bg-purple-400/60 rounded-full animate-pulse delay-300"></div>
+                <div className="absolute bottom-3 left-3 w-1 h-1 bg-emerald-400/50 rounded-full animate-bounce delay-500"></div>
+              </div>
             </div>
-          </div>
-          <h3 className="text-sm font-bold text-gray-900 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-500">
-            {tech.name}
-          </h3>
-          <p className="text-xs text-gray-600 leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-3">
-            {tech.description}
-          </p>
-          <div className={`absolute inset-0 rounded-2xl ${tech.shadow} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}></div>
-        </div>
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute top-2 left-2 w-1 h-1 bg-blue-400/60 rounded-full animate-ping"></div>
-          <div className="absolute top-3 right-3 w-0.5 h-0.5 bg-purple-400/60 rounded-full animate-pulse delay-300"></div>
-          <div className="absolute bottom-3 left-3 w-1 h-1 bg-emerald-400/50 rounded-full animate-bounce delay-500"></div>
-        </div>
+          </Card3D>
+        ))}
       </div>
-    </Card3D>
-  ))}
-</div>
 
       <Card3D containerClassName="max-w-6xl mx-auto">
         <div className="group relative w-full rounded-3xl overflow-hidden">

@@ -1,54 +1,63 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 
-// Global Styles
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Layout
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 
-// Homepage Sections
-import Hero from './components/sections/Hero';
+// Sections
 import TestimonialCard from './components/sections/TestimonialsCard';
 import About from './components/sections/About';
+import Contact from './components/sections/Contact';
+import GlobalPresence from './components/sections/GlobalPresence';
+import Hero from './components/sections/Hero';
+import Industries from './components/sections/Industries';
+import Insights from './components/sections/Insights';
 import Services from './components/sections/Services';
 import TechStack from './components/sections/TechStack';
-import Industries from './components/sections/Industries';
-import GlobalPresence from './components/sections/GlobalPresence';
-import Insights from './components/sections/Insights';
-import Contact from './components/sections/Contact';
 
 // Pages
 import OurStory from './components/CompanyStory/OurStory';
 import ServicesPage from './components/Services/ServicesPage';
 import IndustriesPage from './components/IndustriesPage';
-import MegaMenuServices from './components/MegaMenus/MegaMenuServices';
 
-// HomePage with scroll-to-hash
-const HomePage = () => {
+// Lazy-load MegaMenuServices
+const MegaMenuServices = lazy(() => import('./components/MegaMenus/MegaMenuServices'));
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+// Scroll to section if redirected with state
+function ScrollToServices() {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
-      const el = document.querySelector(location.hash);
-      if (el) {
+    if (location.pathname === '/' && location.state?.scrollToServices) {
+      const section = document.getElementById('services');
+      if (section) {
         setTimeout(() => {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
+          section.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
       }
     }
   }, [location]);
 
+  return null;
+}
+
+// Home Page Layout
+function HomePage() {
   return (
     <>
       <Header />
+      <ScrollToServices />
       <main>
         <Hero />
         <TestimonialCard />
         <About />
-        <Services />
+        <Services onServiceClick={() => {}} />
+
         <TechStack />
         <Industries />
         <GlobalPresence />
@@ -58,8 +67,9 @@ const HomePage = () => {
       <Footer />
     </>
   );
-};
+}
 
+// App Component with Routes
 function App() {
   return (
     <Router>
@@ -67,19 +77,21 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/our-story" element={<OurStory />} />
         <Route path="/industries" element={<IndustriesPage />} />
-        <Route path="/services" element={<Services />} /> {/* Optional: main section list */}
-        <Route path="/services/:serviceId" element={<ServicesPage />} /> {/* ✅ Fix: dynamic route */}
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:serviceId" element={<ServicesPage />} />
         <Route
           path="/services-portal"
           element={
-            <div className="min-h-screen bg-gray-100 p-8">
-              <div className="max-w-7xl mx-auto">
-                <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center font-[Poppins]">
-                  Our Services
-                </h1>
-                <MegaMenuServices />
+            <Suspense fallback={<div className="text-center p-10">Loading services...</div>}>
+              <div className="min-h-screen bg-gray-100 p-8">
+                <div className="max-w-7xl mx-auto">
+                  <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+                    Our Services
+                  </h1>
+                  <MegaMenuServices />
+                </div>
               </div>
-            </div>
+            </Suspense>
           }
         />
       </Routes>

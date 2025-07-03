@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
+
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import Section from '../ui /Section';
 import {
   LineChart,
   Database,
@@ -16,100 +16,6 @@ import {
 interface ServicesProps {
   onServiceClick: (serviceTitle: string) => void;
 }
-
-// DirectionAwareHover component integrated directly
-interface DirectionAwareHoverProps {
-  imageUrl: string;
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
-}
-
-const DirectionAwareHover: React.FC<DirectionAwareHoverProps> = ({
-  imageUrl,
-  children,
-  className = '',
-  onClick
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [direction, setDirection] = useState('');
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const getDirection = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    
-    const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const width = rect.width;
-    const height = rect.height;
-
-    const centerX = width / 2;
-    const centerY = height / 2;
-
-    const deltaX = x - centerX;
-    const deltaY = y - centerY;
-
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      return deltaX > 0 ? 'right' : 'left';
-    } else {
-      return deltaY > 0 ? 'bottom' : 'top';
-    }
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    const dir = getDirection(e);
-    setDirection(dir);
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent) => {
-    const dir = getDirection(e);
-    setDirection(dir);
-    setIsHovered(false);
-  };
-
-  const getOverlayTransform = () => {
-    if (!isHovered) {
-      switch (direction) {
-        case 'top': return 'translateY(-100%)';
-        case 'bottom': return 'translateY(100%)';
-        case 'left': return 'translateX(-100%)';
-        case 'right': return 'translateX(100%)';
-        default: return 'translateY(-100%)';
-      }
-    }
-    return 'translate(0, 0)';
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`relative overflow-hidden rounded-xl group cursor-pointer ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-    >
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      />
-      
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
-      
-      {/* Content Overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90 transition-transform duration-300 ease-out"
-        style={{ transform: getOverlayTransform() }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
 
 const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
   const navigate = useNavigate();
@@ -174,33 +80,28 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
   ];
 
   const handleServiceClick = (service: any) => {
-    try {
-      // Call the parent callback first
-      onServiceClick(service.title);
-      
-      // Navigate to the detailed service page
-      navigate(`/services/${service.route}`);
-    } catch (error) {
-      console.error('Navigation error:', error);
-      // Fallback navigation
-      window.location.href = `/services/${service.route}`;
-    }
+    onServiceClick(service.title);
+    navigate(`/services/${service.route}`);
   };
 
   return (
-    <Section
-      id="services"
-      title="Our Services"
-      subtitle="Comprehensive solutions tailored to your data-driven growth"
-      className="bg-gray-50 relative overflow-hidden"
-    >
+    <section id="services" className="py-20 bg-gray-50 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full blur-3xl opacity-10 animate-pulse" />
         <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }} />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-52 h-52 bg-gradient-to-br from-blue-300 to-cyan-300 rounded-full blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '4s' }} />
       </div>
 
-      
+      <div className="container mx-auto px-6 py-12 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Services</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Comprehensive solutions tailored to your data-driven growth
+          </p>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Click on any service below to explore detailed solutions and see how we can help transform your business.
+          </p>
+        </div>
 
         {/* Desktop Layout */}
         <div className="hidden lg:block">
@@ -237,13 +138,39 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
                   key={service.title}
                   className={`col-start-${position.col} row-start-${position.row} h-56`}
                 >
-                  <DirectionAwareHover 
-                    imageUrl={service.imageUrl} 
-                    className="h-full shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+                  <div 
+                    className="relative overflow-hidden rounded-xl group cursor-pointer h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                     onClick={() => handleServiceClick(service)}
                   >
-                    <ServiceCard service={service} />
-                  </DirectionAwareHover>
+                    {/* Background Image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${service.imageUrl})` }}
+                    />
+                    
+                    {/* Dark Overlay */}
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
+                    
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="p-6 flex flex-col items-center text-center h-full justify-center">
+                        <div className="transform group-hover:scale-110 transition-transform duration-300">
+                          {service.icon}
+                        </div>
+                        <h3 className="text-lg font-bold text-white mt-3 group-hover:text-blue-200 transition-colors duration-300">
+                          {service.title}
+                        </h3>
+                        <p className="text-white/90 text-sm mt-2 leading-relaxed group-hover:text-white transition-colors duration-300">
+                          {service.description}
+                        </p>
+                        <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                            <span className="text-white text-sm font-medium">Learn More →</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -265,47 +192,46 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {services.map((service) => (
-              <DirectionAwareHover
+              <div
                 key={service.title}
-                imageUrl={service.imageUrl}
-                className="h-48 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105"
+                className="relative overflow-hidden rounded-xl group cursor-pointer h-48 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                 onClick={() => handleServiceClick(service)}
               >
-                <ServiceCard service={service} />
-              </DirectionAwareHover>
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${service.imageUrl})` }}
+                />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
+                
+                {/* Content Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="p-6 flex flex-col items-center text-center h-full justify-center">
+                    <div className="transform group-hover:scale-110 transition-transform duration-300">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-lg font-bold text-white mt-3 group-hover:text-blue-200 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-white/90 text-sm mt-2 leading-relaxed group-hover:text-white transition-colors duration-300">
+                      {service.description}
+                    </p>
+                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
+                        <span className="text-white text-sm font-medium">Learn More →</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-    
-    </Section>
+      </div>
+    </section>
   );
 };
-
-interface ServiceCardProps {
-  service: {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-  };
-}
-
-const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => (
-  <div className="p-6 flex flex-col items-center text-center h-full justify-center group">
-    <div className="transform group-hover:scale-110 transition-transform duration-300">
-      {service.icon}
-    </div>
-    <h3 className="text-lg font-bold text-white mt-3 group-hover:text-blue-200 transition-colors duration-300">
-      {service.title}
-    </h3>
-    <p className="text-white/90 text-sm mt-2 leading-relaxed group-hover:text-white transition-colors duration-300">
-      {service.description}
-    </p>
-    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
-        <span className="text-white text-sm font-medium">Learn More →</span>
-      </div>
-    </div>
-  </div>
-);
 
 export default Services;

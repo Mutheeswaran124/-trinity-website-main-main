@@ -131,11 +131,17 @@ const MegaMenuInsights = ({ onClose }: { onClose?: () => void }) => {
                     </div>
                     <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-violet-600 group-hover:translate-x-1 transition-all duration-300" />
                   </div>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                    animate={{ translateX: ['100%', '100%'] }}
-                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
-                  />
+                 <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+    initial={{ x: '-100%' }}
+    animate={{ x: '100%' }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 3,
+      ease: 'linear',
+    }}
+  />
                 </motion.a>
               ))}
             </div>
@@ -215,19 +221,24 @@ const MegaMenuInsights = ({ onClose }: { onClose?: () => void }) => {
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-700 via-purple-700 to-violet-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                  animate={{ translateX: ['100%', '100%'] }}
-                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3, ease: "linear" }}
-                />
-              </motion.button>
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+    initial={{ x: '-100%' }}
+    animate={{ x: '100%' }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 3,
+      ease: 'linear',
+    }}
+  />
+</motion.button>
 
               <motion.a
                 href="#all-reports"
                 whileHover={{ scale: 1.02 }}
                 className="text-violet-600 font-semibold hover:text-violet-700 transition-colors flex items-center space-x-1"
               >
-                <span>View All Reports</span>
-                <ArrowRight className="h-4 w-4" />
+               
               </motion.a>
             </motion.div>
           </div>

@@ -132,7 +132,7 @@ const locations = [
     establishedYear: '2020',
     address: '300 Interpace Parkway, Plano, TX',
     coordinates: { lat: 33.019843, lng: -96.698885 },
-    employees: '150+',
+    employees: '50+',
     services: ['Cloud Solutions', 'AI Development', 'Cybersecurity'],
     timezone: 'CST',
     description: 'Our flagship headquarters driving innovation in cloud technologies and AI solutions.',
@@ -147,7 +147,7 @@ const locations = [
     establishedYear: '2021',
     address: 'Ambal Nagar, Ekkatuthangal, Chennai - 600044, Tamil Nadu',
     coordinates: { lat: 13.082680, lng: 80.270718 },
-    employees: '200+',
+    employees: '50+',
     services: ['Software Development', 'Data Analytics', 'Mobile Apps'],
     timezone: 'IST',
     description: 'Our largest development center focusing on cutting-edge software solutions.',
@@ -177,7 +177,7 @@ const locations = [
     establishedYear: '2023',
     address: 'The Hague, Netherlands',
     coordinates: { lat: 52.0704978, lng: 4.3006999 },
-    employees: '75+',
+    employees: '50+',
     services: ['Fintech Solutions', 'Blockchain', 'IoT Development'],
     timezone: 'CET',
     description: 'European innovation center specializing in financial technology.',
@@ -382,7 +382,7 @@ const GlobalPresence = () => {
                   {[
                     { label: 'Offices', value: '4', icon: Building },
                     { label: 'Team', value: '50+', icon: Users },
-                    { label: 'Countries', value: '25+', icon: MapPin },
+                    { label: 'Countries', value: '10+', icon: MapPin },
                     { label: 'Uptime', value: '99.9%', icon: Shield }
                   ].map((stat, index) => (
                     <div

@@ -1,35 +1,34 @@
 "use client";
-import React from 'react';
+
 import { motion } from 'framer-motion';
-import { Users, Target, Award, Globe, Building, TrendingUp, ArrowRight } from 'lucide-react';
+import { Users, Target, Award, Globe, Building, TrendingUp } from 'lucide-react';
 
 const partners = [
   { name: 'AWS', href: '#aws', logo: 'https://download.logo.wine/logo/Amazon_Web_Services/Amazon_Web_Services-Logo.wine.png' },
-  { name: 'Odoo', href: '#odoo', logo: 'https://cdn4.iconfinder.com/data/icons/logos-3/640/odoo_logo_rgb-512.png' },
-  { name: 'Databricks', href: '#databricks', logo: 'https://images.seeklogo.com/logo-png/61/1/databricks-icon-logo-png_seeklogo-611588.png' },
   { name: 'Azure', href: '#azure', logo: 'https://www.svgrepo.com/show/303372/azure-1-logo.svg' },
-  { name: 'Fivetran', href: '#fivetran', logo: 'https://images.icon-icons.com/2699/PNG/512/fivetran_logo_icon_170149.png' },
-  { name: 'dbt Labs', href: '#dbt', logo: 'https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png' },
+  { name: 'Databricks', href: '#databricks', logo: 'https://images.seeklogo.com/logo-png/61/1/databricks-icon-logo-png_seeklogo-611588.png' },
+{ name: 'L&T', href: '#lt', logo: 'https://i.pinimg.com/736x/6d/40/8f/6d408fbeb3e7409c124688364f0b4b42.jpg'}
+ 
 ];
 
 const highlights = [
   {
-    number: '50+',
+    number: '100+',
     label: 'Projects Delivered',
     icon: TrendingUp,
     image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80',
     textColor: 'text-white',
   },
   {
-    number: '5+ Years',
+    number: '25+ Years',
     label: 'Experience',
     icon: Users,
     image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80',
     textColor: 'text-white',
   },
   {
-    number: '4+',
-    label: 'Countries Served',
+    number: '100+ Years',
+    label: 'Combined Experience',
     icon: Globe,
     image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80',
     textColor: 'text-white',
@@ -45,8 +44,8 @@ const highlights = [
 
 const MegaMenuAbout = () => {
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-8 max-w-7xl mx-auto mt-[-30px]">
-      <div className="grid grid-cols-9 gap-8">
+    <div className="bg-white rounded-xl shadow-lg p-8 max-w-7xl mx-auto mt-[-52px]">
+  <div className="grid grid-cols-9 gap-8">
         {/* Left Section - Company Overview */}
         <div className="col-span-3 space-y-6">
           <motion.div
@@ -59,18 +58,22 @@ const MegaMenuAbout = () => {
               About Trinity
             </span>
             <h3 className="text-2xl font-bold text-gray-900 leading-tight">
-              Why Trinity Technology <span className="text-blue-600">Solutions?</span>
+              Why Trinity <span className="text-blue-600">Solutions?</span>
             </h3>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Empowering businesses with cutting-edge <span className="font-semibold text-blue-600">data engineering, analytics, and AI solutions</span>.
+              Because we don't just deliver services — we solve real problems. 
+              We bring together people, process, and purpose to create tech that works, scales, and drives impact. 
+              <span className="font-semibold text-blue-600"> Data-smart. AI-driven. Human-focused.</span> 
+              Trusted across 4 countries.Agile like a startup, reliable like an enterprise. 
+              In a world full of vendors, we're your partner in progress.
             </p>
           </motion.div>
          
           <div className="space-y-3">
             {[
-              { icon: Target, text: 'Founded in 2020', color: 'bg-emerald-500' },
-              { icon: Award, text: 'Databricks Official Partner', color: 'bg-purple-500' },
-              { icon: Building, text: 'Global Presence in 4+ Continent', color: 'bg-blue-500' }
+              { icon: Target, text: 'Global Presence in 4+ Continent', color: 'bg-emerald-500' },
+              { icon: Award, text: 'Data-smart. AI-driven. Human-focused', color: 'bg-purple-500' },
+              { icon: Building, text: 'Proven track record from staffing to software to enterprise AI', color: 'bg-blue-500' }
             ].map((item, index) => (
               <motion.div
                 key={index}
@@ -204,40 +207,6 @@ const MegaMenuAbout = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-
-        {/* Call-to-Action */}
-        <div className="col-span-9 flex justify-center mt-8">
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            whileHover={{ scale: 1.02, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 group"
-          >
-            <div className="relative z-10 flex items-center space-x-3">
-              <span>Learn More About Us</span>
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </div>
-            
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-700 via-blue-800 to-blue-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            
-            {/* Shimmer effect */}
-   <motion.div
-  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-  animate={{ x: ['-100%', '100%'] }}
-  transition={{
-    duration: 2,
-    repeat: Infinity,
-    ease: 'linear',
-  }}
-/>
-
-
-
-          </motion.button>
         </div>
       </div>
     </div>

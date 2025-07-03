@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   MapPin, DollarSign, Users, Heart, ArrowRight, Star, Briefcase,
@@ -315,17 +316,24 @@ const MegaMenuCareers = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-orange-700 via-red-700 to-orange-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     
                     {/* Shimmer effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full"
-                      animate={{ translateX: ['100%', '100%'] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatDelay: 3,
-                        ease: "linear"
-                      }}
-                    />
-                  </motion.button>
+                  
+
+
+
+  {/* Shimmer Gradient Overlay */}
+  <motion.div
+    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+    initial={{ x: '-100%' }}
+    animate={{ x: '100%' }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 3,
+      ease: 'linear',
+    }}
+  />
+</motion.button>
+
 
                   <motion.button
                     onClick={toggleJobSearch}

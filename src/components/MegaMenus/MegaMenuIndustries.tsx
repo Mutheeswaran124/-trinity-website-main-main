@@ -153,12 +153,7 @@ const MegaMenuIndustries = () => {
           </div>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex items-center justify-between pt-4"
-          >
+          
             <motion.a
               href="/industries"
               whileHover={{ scale: 1.02 }}
@@ -169,15 +164,7 @@ const MegaMenuIndustries = () => {
               <ArrowRight className="h-4 w-4" />
             </motion.a>
             
-            <motion.a
-              href="#case-studies"
-              whileHover={{ scale: 1.02 }}
-              className="text-blue-600 font-semibold hover:text-blue-700 transition-colors flex items-center space-x-1"
-            >
-              <span>View Case Studies</span>
-              <ArrowRight className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
+           
         </div>
 
         {/* Right Sidebar */}
