@@ -24,7 +24,8 @@ const JoinOurTeam = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+   <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 -mt-10">
+
 <div className="max-w-6xl mx-auto px-4 pt-2 pb-8">
 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
