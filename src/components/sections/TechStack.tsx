@@ -1,5 +1,10 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, ReactNode } from 'react';
 import Section from '../ui /Section';
+
+interface Card3DProps {
+  children: ReactNode;
+  containerClassName?: string;
+}
 
 const TechStack = () => {
   const handleScrollToContact = () => {
@@ -82,11 +87,11 @@ const TechStack = () => {
     },
   ];
 
-  const Card3D = ({ children, containerClassName = '' }) => {
+  const Card3D = ({ children, containerClassName = '' }: Card3DProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: { clientX: number; clientY: number }) => {
       if (!containerRef.current) return;
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
       const x = (e.clientX - left - width / 2) / 25;
@@ -117,9 +122,7 @@ const TechStack = () => {
         <div
           ref={containerRef}
           className="relative preserve-3d w-full h-full transition-transform duration-500 ease-out"
-          style={{
-            transformStyle: 'preserve-3d',
-          }}
+          style={{ transformStyle: 'preserve-3d' }}
         >
           <div className={`relative w-full h-full ${isHovered ? 'z-50' : ''}`}>
             {children}

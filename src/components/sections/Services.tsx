@@ -98,9 +98,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Comprehensive solutions tailored to your data-driven growth
           </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Click on any service below to explore detailed solutions and see how we can help transform your business.
-          </p>
+         
         </div>
 
         {/* Desktop Layout */}

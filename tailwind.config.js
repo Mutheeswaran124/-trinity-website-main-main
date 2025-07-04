@@ -59,8 +59,20 @@ export default {
         'fade-in': 'fadeIn 0.5s ease-in-out forwards',
         'slide-up': 'slideUp 0.5s ease-out forwards',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'shimmer': 'shimmer 3s linear infinite',
+        'spin-slow': 'spin-slow 8s linear infinite', // ✅ Added
+      },
+      keyframes: {
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'spin-slow': { // ✅ Added keyframes
+          from: { transform: 'rotate(0deg)' },
+          to: { transform: 'rotate(360deg)' },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [], // ✅ Removed @tailwindcss/line-clamp warning
 };

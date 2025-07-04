@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect } from 'react';
-
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Layout
@@ -16,6 +15,7 @@ import Industries from './components/sections/Industries';
 import Insights from './components/sections/Insights';
 import Services from './components/sections/Services';
 import TechStack from './components/sections/TechStack';
+import OurBusinesses from './components/sections/OurBusinesses'; // ✅ Make sure this file uses `export default`
 
 // Pages
 import OurStory from './components/CompanyStory/OurStory';
@@ -57,11 +57,11 @@ function HomePage() {
         <TestimonialCard />
         <About />
         <Services onServiceClick={() => {}} />
-
         <TechStack />
         <Industries />
         <GlobalPresence />
         <Insights />
+        <OurBusinesses />
         <Contact />
       </main>
       <Footer />

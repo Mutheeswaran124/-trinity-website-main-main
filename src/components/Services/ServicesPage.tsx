@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   BarChart2,
@@ -9,7 +9,6 @@ import {
   Activity,
   Users,
   Briefcase,
-  ArrowRight,
   CheckCircle,
   Award,
   TrendingUp,
@@ -27,7 +26,7 @@ const ServicesPage = () => {
       icon: BarChart2,
       title: 'Data Strategy & Analytics',
       subtitle: 'Transform Raw Data Into Strategic Advantage',
-      description: 'Unlock the full potential of your data with our comprehensive analytics and AI solutions...',
+      description: 'Unlock the full potential of your data with our comprehensive analytics and AI solutions that transform raw information into actionable business intelligence. Our expert team specializes in creating data-driven strategies that align with your business objectives and drive measurable outcomes',
       image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Advanced Predictive Analytics',
@@ -47,7 +46,7 @@ const ServicesPage = () => {
       icon: Database,
       title: 'Data Engineering & Infrastructure',
       subtitle: 'Build Robust Data Foundations',
-      description: 'Create scalable, reliable data infrastructures that grow with your organization...',
+      description: 'Create scalable, reliable data infrastructures that grow with your organization and handle enterprise-scale workloads. Our data engineering services ensure your data is accessible, reliable, and ready for analysis at any scale',
       image: 'https://images.pexels.com/photos/1181298/pexels-photo-1181298.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Cloud-native Architecture',
@@ -67,7 +66,7 @@ const ServicesPage = () => {
       icon: ShieldCheck,
       title: 'Data Governance & Security',
       subtitle: 'Ensure Quality, Security & Compliance',
-      description: 'Protect your most valuable asset with comprehensive data governance frameworks...',
+      description: 'Protect your most valuable asset with comprehensive data governance frameworks and enterprise-grade security measures. Our governance solutions ensure your data remains secure, compliant, and trustworthy across all business operations.',
       image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'GDPR & CCPA Compliance',
@@ -87,7 +86,7 @@ const ServicesPage = () => {
       icon: Monitor,
       title: 'Business Intelligence & Reporting',
       subtitle: 'Transform Data Into Actionable Insights',
-      description: 'Empower decision-makers with intuitive dashboards and comprehensive reporting...',
+      description: 'Empower decision-makers with intuitive dashboards and comprehensive reporting that drives strategic decisions. Our BI solutions provide real-time visibility into your business performance with actionable insights that matter.',
       image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Interactive Dashboards',
@@ -107,7 +106,7 @@ const ServicesPage = () => {
       icon: Cloud,
       title: 'Cloud Migration & Modernization',
       subtitle: 'Modernize Your Data Infrastructure',
-      description: 'Migrate to modern cloud platforms for enhanced performance, scalability, and cost-effectiveness...',
+      description: 'Migrate to modern cloud platforms for enhanced performance, scalability, and cost-effectiveness. Our cloud migration services ensure seamless transition with minimal downtime while maximizing the benefits of cloud computing.',
       image: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Zero-downtime Migration',
@@ -127,7 +126,7 @@ const ServicesPage = () => {
       icon: Activity,
       title: 'Artificial Intelligence & Machine Learning',
       subtitle: 'Innovate with AI-Powered Solutions',
-      description: 'Harness the power of artificial intelligence to automate processes, predict outcomes...',
+      description: 'Harness the power of artificial intelligence to automate processes, predict outcomes, and unlock new business opportunities. Our AI solutions are designed to integrate seamlessly with your existing operations while delivering measurable results.',
       image: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Custom AI Models',
@@ -147,7 +146,7 @@ const ServicesPage = () => {
       icon: Briefcase,
       title: 'ERP Evolution & Planning',
       subtitle: 'Streamline Business Operations',
-      description: 'Say goodbye to clunky systems and hello to streamlined processes...',
+      description: 'Transform your business processes with modern ERP solutions that integrate all aspects of your operations. Our ERP services help you streamline workflows, improve efficiency, and gain real-time visibility into your business performance.',
       image: 'https://images.pexels.com/photos/1181345/pexels-photo-1181345.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Integrated Business Processes',
@@ -167,7 +166,7 @@ const ServicesPage = () => {
       icon: Users,
       title: 'Expert Staffing Solutions',
       subtitle: 'Build Your Dream Data Team',
-      description: 'Access top-tier data professionals to strengthen your team...',
+      description: 'Access top-tier data professionals to strengthen your team with skilled experts in data science, analytics, and engineering. Our staffing solutions provide flexible engagement models to meet your specific talent needs.',
       image: 'https://images.pexels.com/photos/1181534/pexels-photo-1181534.jpeg?auto=compress&cs=tinysrgb&w=800',
       features: [
         'Vetted Data Specialists',

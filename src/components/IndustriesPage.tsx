@@ -10,10 +10,7 @@ import {
   TrendingUp, 
   Zap, 
   Shield, 
-  Users, 
-  BarChart3, 
-  Globe, 
-  ArrowRight,
+ 
   CheckCircle2
 } from 'lucide-react';
 
