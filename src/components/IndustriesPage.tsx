@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { 
-  Heart, 
-  Banknote, 
-  ShoppingCart, 
-  Factory, 
-  Radio, 
-  Building2, 
-  TrendingUp, 
-  Zap, 
-  Shield, 
+import {
+  Heart,
+  Banknote,
+  ShoppingCart,
+  Factory,
+  Radio,
+  Building2,
+  TrendingUp,
+  Zap,
+  Shield,
   CheckCircle2,
-  ArrowLeft
+  ArrowLeft,
 } from 'lucide-react';
+
+import Header from '../components/layout/Header'; // ✅ Adjusted import path
 
 const IndustriesPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Handle anchor links
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
@@ -201,153 +202,141 @@ const IndustriesPage = () => {
     }
   ];
 
-  return (
+  
+ return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            <span className="font-medium">Back to Industries Overview</span>
-          </button>
-        </div>
+      {/* Sticky Header */}
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Header />
       </div>
 
-      {/* Hero Section - Updated to match your uploaded image */}
-      <div className="bg-[#1a3085] text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex justify-center mb-6">
-            <span className="bg-blue-800/80 text-blue-100 px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-2 mx-auto">
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.505l6.908-1.004L12 2.25l3.092 6.251L22 9.505l-4.007 4.617 1.179 6.873z"/></svg>
-              Enterprise-Grade Solutions
-            </span>
-          </div>
-         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-  Transform Your Business with Our<br className="hidden md:block" /> Services
-</h1>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
-            Comprehensive technology solutions designed to accelerate your growth, optimize operations, and drive innovation across every aspect of your business.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
-              <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.505l6.908-1.004L12 2.25l3.092 6.251L22 9.505l-4.007 4.617 1.179 6.873z"/></svg>
-              98% Success Rate
+      <div className="pt-20">
+        {/* Navigation Header */}
+      
+
+        {/* Hero Section */}
+        <div className="bg-[#1a3085] text-white py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="flex justify-center mb-6">
+              <span className="bg-blue-800/80 text-blue-100 px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-2 mx-auto">
+                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.505l6.908-1.004L12 2.25l3.092 6.251L22 9.505l-4.007 4.617 1.179 6.873z"/></svg>
+                Enterprise-Grade Solutions
+              </span>
             </div>
-            <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
-              <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg>
-              500+ Projects Delivered
-            </div>
-            <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
-              <svg className="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              24/7 Support
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
+              Transform Your Business with Our<br className="hidden md:block" /> Services
+            </h1>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
+              Comprehensive technology solutions designed to accelerate your growth, optimize operations, and drive innovation across every aspect of your business.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
+                <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 17.75l-6.172 3.245 1.179-6.873L2 9.505l6.908-1.004L12 2.25l3.092 6.251L22 9.505l-4.007 4.617 1.179 6.873z"/></svg>
+                98% Success Rate
+              </div>
+              <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/></svg>
+                500+ Projects Delivered
+              </div>
+              <div className="flex items-center bg-blue-900/80 rounded-lg px-5 py-2 text-base font-medium text-blue-100 gap-2">
+                <svg className="w-5 h-5 text-blue-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                24/7 Support
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Industries Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="space-y-24">
-          {industries.map((industry, index) => (
-            <div
-              key={industry.id}
-              id={industry.id}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-              }`}
-            >
-              {/* Content */}
-              <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-blue-100 rounded-full">
-                    {React.createElement(industry.icon, { 
-                      className: 'h-8 w-8 text-blue-600' 
-                    })}
+        {/* Industries Section */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="space-y-24">
+            {industries.map((industry, index) => (
+              <div
+                key={industry.id}
+                id={industry.id}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}
+              >
+                <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
+                  <div className="flex items-center space-x-4">
+                    <div className="p-3 bg-blue-100 rounded-full">
+                      {React.createElement(industry.icon, {
+                        className: 'h-8 w-8 text-blue-600',
+                      })}
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold text-gray-900">{industry.title}</h2>
+                      <div className="w-16 h-1 bg-blue-600 mt-2"></div>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-3xl font-bold text-gray-900">{industry.title}</h2>
-                    <div className="w-16 h-1 bg-blue-600 mt-2"></div>
+                  <h3 className="text-xl font-semibold text-blue-600">{industry.subtitle}</h3>
+                  <p className="text-gray-600 leading-relaxed text-lg">{industry.description}</p>
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-900">Key Services:</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {industry.keyServices.map((service) => (
+                        <div key={service} className="flex items-center space-x-2">
+                          <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
+                          <span className="text-gray-700">{service}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                
-                <h3 className="text-xl font-semibold text-blue-600">{industry.subtitle}</h3>
-                
-                <p className="text-gray-600 leading-relaxed text-lg">{industry.description}</p>
-                
-                <div className="space-y-4">
-                  <h4 className="text-lg font-semibold text-gray-900">Key Services:</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {industry.keyServices.map((service) => (
-                      <div key={service} className="flex items-center space-x-2">
-                        <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
-                        <span className="text-gray-700">{service}</span>
+                  <div className="bg-gray-100 rounded-lg p-6">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <div className="text-2xl font-bold text-blue-600">{industry.stats.projects}</div>
+                        <div className="text-sm text-gray-600">Projects</div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="bg-gray-100 rounded-lg p-6">
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-2xl font-bold text-blue-600">{industry.stats.projects}</div>
-                      <div className="text-sm text-gray-600">Projects</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-blue-600">{industry.stats.specialists}</div>
-                      <div className="text-sm text-gray-600">Specialists</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-bold text-blue-600">{industry.stats.retention}</div>
-                      <div className="text-sm text-gray-600">Retention</div>
+                      <div>
+                        <div className="text-2xl font-bold text-blue-600">{industry.stats.specialists}</div>
+                        <div className="text-sm text-gray-600">Specialists</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-blue-600">{industry.stats.retention}</div>
+                        <div className="text-sm text-gray-600">Retention</div>
+                      </div>
                     </div>
                   </div>
+                  <div className="pt-4">
+                    <button
+                      onClick={() => navigate('/')}
+                      className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                      View All Industries
+                    </button>
+                  </div>
                 </div>
-                
-                <div className="pt-4">
-                  <button
-                    onClick={() => navigate('/')}
-                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    View All Industries
-                  </button>
-                </div>
-              </div>
-
-              {/* Image */}
-              <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
-                <div className="relative">
-                  <img
-                    src={industry.image}
-                    alt={industry.title}
-                    className="w-full h-80 object-cover rounded-2xl shadow-lg"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                  <div className="relative">
+                    <img
+                      src={industry.image}
+                      alt={industry.title}
+                      className="w-full h-80 object-cover rounded-2xl shadow-lg"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Call to Action Section */}
-      <div className="bg-blue-600 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Industry?</h2>
-          <p className="text-xl text-blue-100 mb-8">
-            Connect with our industry experts to discover how we can help you find the right talent 
-            and drive innovation in your sector.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              Schedule Consultation
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-              View Success Stories
-            </button>
+        {/* CTA Section */}
+        <div className="bg-blue-600 text-white py-16">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Industry?</h2>
+            <p className="text-xl text-blue-100 mb-8">
+              Connect with our industry experts to discover how we can help you find the right talent
+              and drive innovation in your sector.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                Schedule Consultation
+              </button>
+              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                View Success Stories
+              </button>
+            </div>
           </div>
         </div>
       </div>

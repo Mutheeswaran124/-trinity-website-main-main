@@ -221,7 +221,7 @@ const Industries = () => {
                     <p>{industry.caseStudy}</p>
                   </div>
                   <button
-                    onClick={(e) => {
+                    onClick={() => {
                       if (dragDistance < 5) handleLearnMore(industry.id);
                     }}
                     className="w-full flex justify-center items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/20 transition transform hover:scale-105 border border-white/30"

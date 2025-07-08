@@ -13,11 +13,7 @@ import {
   Briefcase,
 } from 'lucide-react';
 
-interface ServicesProps {
-  onServiceClick: (serviceTitle: string) => void;
-}
-
-const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
+const Services: React.FC = () => {
   const navigate = useNavigate();
 
   const services = [
@@ -80,7 +76,7 @@ const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
   ];
 
   const handleServiceClick = (service: any) => {
-    onServiceClick(service.title);
+    console.log(`Navigating to: /services/${service.route}`);
     navigate(`/services/${service.route}`);
   };
 
