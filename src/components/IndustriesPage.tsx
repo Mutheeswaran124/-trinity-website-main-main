@@ -1,21 +1,22 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { 
   Heart, 
   Banknote, 
   ShoppingCart, 
   Factory, 
-  Plane, 
+  Radio, 
   Building2, 
   TrendingUp, 
   Zap, 
   Shield, 
- 
-  CheckCircle2
+  CheckCircle2,
+  ArrowLeft
 } from 'lucide-react';
 
 const IndustriesPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Handle anchor links
@@ -98,7 +99,7 @@ const IndustriesPage = () => {
     },
     {
       id: 'telecommunications',
-      icon: Plane,
+      icon: Radio,
       title: 'Telecommunications',
       subtitle: 'Connecting the Digital World',
       description: 'Telecommunications infrastructure is the backbone of our connected world. With 5G deployment, network security, and cloud communications, we help telecom companies find experts who can navigate this complex landscape.',
@@ -202,6 +203,19 @@ const IndustriesPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Navigation Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="font-medium">Back to Industries Overview</span>
+          </button>
+        </div>
+      </div>
+
       {/* Hero Section - Updated to match your uploaded image */}
       <div className="bg-[#1a3085] text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -291,7 +305,16 @@ const IndustriesPage = () => {
                     </div>
                   </div>
                 </div>
-                {/* Explore Button Removed */}
+                
+                <div className="pt-4">
+                  <button
+                    onClick={() => navigate('/')}
+                    className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                  >
+                    <ArrowLeft className="w-4 h-4" />
+                    View All Industries
+                  </button>
+                </div>
               </div>
 
               {/* Image */}

@@ -7,8 +7,8 @@ const Industries = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [dragDistance, setDragDistance] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
-
   const navigate = useNavigate();
 
   const industries = [
@@ -96,8 +96,8 @@ const Industries = () => {
 
   const scrollToCard = (index: number) => {
     if (carouselRef.current) {
-      const cardWidth = 320;
-      const scrollPosition = index * cardWidth;
+      const card = carouselRef.current.children[index] as HTMLElement;
+      const scrollPosition = card.offsetLeft;
       carouselRef.current.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
@@ -124,31 +124,38 @@ const Industries = () => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging || !carouselRef.current) return;
-    e.preventDefault();
     const x = e.pageX - (carouselRef.current.offsetLeft || 0);
     const walk = (x - startX) * 2;
+    setDragDistance(Math.abs(walk));
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    setDragDistance(0);
+  };
+
+  const handleLearnMore = (industryId: string) => {
+    navigate(`/industries#${industryId}`);
   };
 
   useEffect(() => {
     const handleScroll = () => {
       if (carouselRef.current) {
+        const card = carouselRef.current.children[0] as HTMLElement;
+        const cardWidth = card?.offsetWidth || 320;
         const scrollLeft = carouselRef.current.scrollLeft;
-        const cardWidth = 320;
         const newIndex = Math.round(scrollLeft / cardWidth);
         setCurrentIndex(newIndex);
       }
     };
 
     const carousel = carouselRef.current;
-    if (carousel) {
-      carousel.addEventListener('scroll', handleScroll);
-      return () => carousel.removeEventListener('scroll', handleScroll);
-    }
+    carousel?.addEventListener('scroll', handleScroll);
+
+    return () => {
+      carousel?.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -164,10 +171,18 @@ const Industries = () => {
         </div>
 
         <div className="flex justify-center gap-4 mb-6">
-          <button onClick={handlePrev} className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100">
+          <button 
+            onClick={handlePrev} 
+            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100"
+            aria-label="Previous industry"
+          >
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <button onClick={handleNext} className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100">
+          <button 
+            onClick={handleNext} 
+            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100"
+            aria-label="Next industry"
+          >
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
@@ -206,7 +221,9 @@ const Industries = () => {
                     <p>{industry.caseStudy}</p>
                   </div>
                   <button
-                    onClick={() => navigate('/industries', { state: { industryId: industry.id } })}
+                    onClick={(e) => {
+                      if (dragDistance < 5) handleLearnMore(industry.id);
+                    }}
                     className="w-full flex justify-center items-center gap-2 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-xl hover:bg-white/20 transition transform hover:scale-105 border border-white/30"
                   >
                     <span className="font-semibold text-sm">Learn More</span>
@@ -226,6 +243,7 @@ const Industries = () => {
               className={`w-2.5 h-2.5 rounded-full transition ${
                 index === currentIndex ? 'bg-blue-600 scale-110' : 'bg-gray-300 hover:bg-gray-400'
               }`}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>

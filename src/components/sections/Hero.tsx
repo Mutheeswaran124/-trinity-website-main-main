@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
               size="lg"
               className="bg-[#22396b] hover:bg-[#3d3dff] text-base px-8 font-bold rounded-full text-white w-[250px] h-[56px]"
             >
-              Why Trinity ?
+              Scroll & Explore
             </Button>
           </motion.div>
 
