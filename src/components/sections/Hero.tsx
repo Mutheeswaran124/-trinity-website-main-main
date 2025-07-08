@@ -1,12 +1,57 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Button from '../ui /Button';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from "framer-motion";
-import ChatBot from '../ChatBot';
 
-import mainhero from '../../animations/mainhero.lottie?url';
-import revolLimsLogo from '../../Assets/logo/revol-lims-logo.png'; // ✅ Corrected path
+import mainhero from '../../Assets/animations/mainhero.lottie?url';
+
+interface ButtonProps {
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  className = '',
+  onClick,
+  disabled = false,
+  type = 'button',
+}) => {
+  const baseClasses = 'font-semibold rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  
+  const variantClasses = {
+    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
+    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
+  };
+  
+  const sizeClasses = {
+    sm: 'px-3 py-1.5 text-sm',
+    md: 'px-4 py-2 text-base',
+    lg: 'px-6 py-3 text-lg',
+  };
+  
+  const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
+  
+  const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`;
+  
+  return (
+    <button
+      type={type}
+      className={buttonClasses}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+};
 
 const partnerLogos = [
   'https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png',
@@ -18,7 +63,7 @@ const partnerLogos = [
   'https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg',
   'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg',
   'https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg',
-  revolLimsLogo, // ✅ Local image
+  'https://via.placeholder.com/200x60/22396b/ffffff?text=REVOL+LIMS', // Placeholder for revol-lims-logo
 ];
 
 function useTypewriter(text: string, speed = 30, delay = 0) {
@@ -65,7 +110,7 @@ const Hero: React.FC = () => {
   `;
 
   return (
-    <div className="pt-16 sm:pt-20 md:pt-36 pb-8 md:pb-16 bg-white relative overflow-hidden">
+    <div className="pt-[70px] sm:pt-[70px] md:pt-[90px] pb-8 md:pb-16 bg-white relative overflow-hidden">
       {/* ✨ Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -177,7 +222,6 @@ const Hero: React.FC = () => {
         </div>
       </section>
 
-      <ChatBot />
     </div>
   );
 };

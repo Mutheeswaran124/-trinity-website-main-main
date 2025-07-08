@@ -76,9 +76,9 @@ const Header = () => {
     <>
       <header
         className={`fixed w-full z-50 transition-all duration-300 font-sans ${
-          isScrolled ? 'bg-white shadow-md py-0' : 'bg-white py-0.5'
+          isScrolled ? 'bg-white shadow-md' : 'bg-white'
         }`}
-        style={{ fontFamily: 'Poppins, sans-serif', height: '90px' }}
+        style={{ fontFamily: 'Poppins, sans-serif', height: '70px' }}
       >
         {/* Background Animated Blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -89,16 +89,17 @@ const Header = () => {
 
         {/* Main Nav Content */}
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10 h-full">
-          <a href="/" className="flex items-center">
-            <img src={TrinityLogo} alt="Trinity Logo" className="h-12 md:h-14 w-auto" />
+          <a href="/" className="flex items-center h-full">
+            <img src={TrinityLogo} alt="Trinity Logo" className="h-10 md:h-12 w-auto block" />
+
           </a>
 
-          <nav className="hidden md:flex items-center space-x-8 ml-auto">
+          <nav className="hidden md:flex items-center space-x-6 ml-auto h-full">
             {navLinks.map((link) => (
-              <div key={link.key} className="relative">
+              <div key={link.key} className="relative h-full flex items-center">
                 <button
                   onClick={() => handleMenuClick(link.key)}
-                  className={`nav-button font-semibold text-base py-2 px-1 transition-colors duration-200 ${
+                  className={`nav-button font-semibold text-base transition-colors duration-200 ${
                     activeMenu === link.key
                       ? 'text-blue-700 border-b-2 border-blue-700'
                       : 'text-blue-800 hover:text-blue-600'
@@ -112,16 +113,16 @@ const Header = () => {
 
           <a
             href="#contact"
-            className="hidden md:inline-block font-semibold bg-blue-600 text-white px-6 py-2 rounded-md transition-colors hover:bg-blue-700 text-base ml-6"
+            className="hidden md:inline-block font-semibold bg-blue-600 text-white px-5 py-2 rounded-md transition-colors hover:bg-blue-700 text-base ml-4"
           >
             Contact Us
           </a>
 
           <button className="md:hidden ml-2" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? (
-              <X size={28} className="text-blue-600" />
+              <X size={24} className="text-blue-600" />
             ) : (
-              <Menu size={28} className="text-blue-600" />
+              <Menu size={24} className="text-blue-600" />
             )}
           </button>
         </div>
@@ -130,8 +131,8 @@ const Header = () => {
       {/* Mega Menu Overlay */}
       {activeMenu && (
         <div className="fixed inset-0 z-40 bg-black bg-opacity-20 backdrop-blur-sm">
-          <div className="mega-menu-container absolute top-20 left-0 right-0 bg-white shadow-2xl border-t border-gray-200">
-            <div className="container mx-auto px-6 py-12">
+          <div className="mega-menu-container absolute top-[70px] left-0 right-0 bg-white shadow-2xl border-t border-gray-200">
+            <div className="container mx-auto px-6 py-10">
               <Suspense fallback={<div>Loading...</div>}>
                 {renderMegaMenu(activeMenu)}
               </Suspense>
@@ -142,9 +143,9 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-white pt-20">
-          <div className="container mx-auto px-4 py-6">
-            <nav className="space-y-4">
+        <div className="md:hidden fixed inset-0 z-40 bg-white pt-[70px]">
+          <div className="container mx-auto px-4 py-5">
+            <nav className="space-y-3">
               {navLinks.map((link) => (
                 <button
                   key={link.key}
@@ -152,14 +153,14 @@ const Header = () => {
                     handleMenuClick(link.key);
                     setIsOpen(false);
                   }}
-                  className="block w-full text-left font-semibold text-blue-800 hover:text-blue-600 py-3 px-4 rounded-lg hover:bg-blue-50 transition-colors"
+                  className="block w-full text-left font-semibold text-blue-800 hover:text-blue-600 py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors text-base"
                 >
                   {link.name}
                 </button>
               ))}
               <a
                 href="#contact"
-                className="block w-full text-center font-semibold bg-blue-600 text-white px-6 py-3 rounded-md transition-colors hover:bg-blue-700 mt-6"
+                className="block w-full text-center font-semibold bg-blue-600 text-white px-5 py-3 rounded-md transition-colors hover:bg-blue-700 mt-5 text-base"
               >
                 Contact Us
               </a>
