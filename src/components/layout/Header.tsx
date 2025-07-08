@@ -1,19 +1,12 @@
-
-// 🔧 Replace it with:
-import { useState, useEffect,lazy,  Suspense } from 'react';
-
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Menu, X } from 'lucide-react';
 import TrinityLogo from '../../Assets/trinity-logo.png';
 
-
-
 import MegaMenuAbout from '../MegaMenus/MegaMenuAbout';
-
 import MegaMenuTechStack from '../MegaMenus/MegaMenuTechStack';
 import MegaMenuIndustries from '../MegaMenus/MegaMenuIndustries';
 import MegaMenuInsights from '../MegaMenus/MegaMenuInsights';
 import MegaMenuCareers from '../MegaMenus/MegaMenuCareers';
-
 
 const MegaMenuServices = lazy(() => import('../MegaMenus/MegaMenuServices'));
 
@@ -25,18 +18,20 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
-      // Close menu on scroll
       setActiveMenu(null);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
-      if (activeMenu && !target.closest('.mega-menu-container') && !target.closest('.nav-button')) {
+      if (
+        activeMenu &&
+        !target.closest('.mega-menu-container') &&
+        !target.closest('.nav-button')
+      ) {
         setActiveMenu(null);
       }
     };
@@ -55,11 +50,7 @@ const Header = () => {
   ];
 
   const handleMenuClick = (key: string) => {
-    if (activeMenu === key) {
-      setActiveMenu(null); // Close if already open
-    } else {
-      setActiveMenu(key); // Open the clicked menu
-    }
+    setActiveMenu((prev) => (prev === key ? null : key));
   };
 
   const renderMegaMenu = (key: string) => {
@@ -85,7 +76,7 @@ const Header = () => {
     <>
       <header
         className={`fixed w-full z-50 transition-all duration-300 font-sans ${
-          isScrolled ? 'bg-white shadow-md py-2' : 'bg-white py-3'
+          isScrolled ? 'bg-white shadow-md py-0' : 'bg-white py-0.5'
         }`}
         style={{ fontFamily: 'Poppins, sans-serif', height: '90px' }}
       >
@@ -96,14 +87,12 @@ const Header = () => {
           <div className="absolute top-20 left-40 w-60 h-60 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-blob animation-delay-4000" />
         </div>
 
-      {/* Main Nav Content */}
+        {/* Main Nav Content */}
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative z-10 h-full">
           <a href="/" className="flex items-center">
             <img src={TrinityLogo} alt="Trinity Logo" className="h-12 md:h-14 w-auto" />
-
           </a>
 
-            
           <nav className="hidden md:flex items-center space-x-8 ml-auto">
             {navLinks.map((link) => (
               <div key={link.key} className="relative">
