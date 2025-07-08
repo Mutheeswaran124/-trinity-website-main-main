@@ -88,7 +88,7 @@ const MegaMenuInsights = ({ onClose }: { onClose?: () => void }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-4 md:p-8 max-w-7xl mx-auto mt-[-30px]">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-4 md:p-8 max-w-7xl mx-auto mt-[-30px] max-h-[80vh] md:max-h-none overflow-y-auto md:overflow-visible">
       <div className="relative overflow-hidden">
         {/* Background Glow */}
         <div className="absolute inset-0 overflow-hidden">
@@ -99,7 +99,7 @@ const MegaMenuInsights = ({ onClose }: { onClose?: () => void }) => {
 
         <div className="relative z-10">
           {/* Mobile Layout */}
-          <div className="block lg:hidden space-y-6">
+          <div className="block lg:hidden space-y-6 pb-4">
             {/* Header */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 

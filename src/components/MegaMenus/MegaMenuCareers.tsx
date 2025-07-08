@@ -27,7 +27,7 @@ const JoinOurTeam = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 -mt-10">
       <div className="max-w-6xl mx-auto px-4 pt-2 pb-8">
         {/* Mobile Layout */}
-        <div className="block lg:hidden space-y-6">
+        <div className="block lg:hidden space-y-6 pb-4 max-h-[80vh] overflow-y-auto">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
