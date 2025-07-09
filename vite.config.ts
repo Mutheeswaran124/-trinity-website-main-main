@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: './',  // ✅ This line is required for correct paths on Hostinger
+
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
@@ -16,6 +18,6 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 1000, // Increased limit to avoid warnings
+    chunkSizeWarningLimit: 1000,
   }
 });

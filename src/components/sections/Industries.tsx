@@ -171,18 +171,10 @@ const Industries = () => {
         </div>
 
         <div className="flex justify-center gap-4 mb-6">
-          <button 
-            onClick={handlePrev} 
-            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100"
-            aria-label="Previous industry"
-          >
+          <button onClick={handlePrev} className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100" aria-label="Previous industry">
             <ChevronLeft className="w-5 h-5 text-gray-600" />
           </button>
-          <button 
-            onClick={handleNext} 
-            className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100"
-            aria-label="Next industry"
-          >
+          <button onClick={handleNext} className="p-2 rounded-full bg-white shadow-lg hover:shadow-xl transition hover:scale-110 border border-gray-100" aria-label="Next industry">
             <ChevronRight className="w-5 h-5 text-gray-600" />
           </button>
         </div>
@@ -208,18 +200,19 @@ const Industries = () => {
                 backgroundPosition: 'center'
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-all duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent transition-all duration-500" />
               <div className="relative z-10 h-full flex flex-col justify-between p-6 text-white font-sans space-y-4">
                 <div className="bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-medium text-white self-start">
                   {industry.category}
                 </div>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold leading-tight text-white">{industry.name}</h3>
-                  <p className="text-sm leading-relaxed text-white">{industry.description}</p>
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-xs text-white">
-                    <h4 className="font-semibold mb-2">Success Story</h4>
-                    <p>{industry.caseStudy}</p>
-                  </div>
+                  <h3 className="text-2xl font-bold leading-tight text-white drop-shadow-md">{industry.name}</h3>
+                  <p className="text-sm leading-relaxed text-white drop-shadow-md">{industry.description}</p>
+                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20 text-xs text-white drop-shadow-sm">
+  <h4 className="font-semibold mb-2 text-white">Success Story</h4>
+  <p>{industry.caseStudy}</p>
+</div>
+
                   <button
                     onClick={() => {
                       if (dragDistance < 5) handleLearnMore(industry.id);

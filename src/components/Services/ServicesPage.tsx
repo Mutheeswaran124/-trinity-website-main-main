@@ -197,7 +197,7 @@ const ServicesPage = () => {
     },
   ];
 
-  const currentService = servicesSections.find((service) => service.id === serviceId);
+    const currentService = servicesSections.find((service) => service.id === serviceId);
   const Icon = currentService?.icon;
 
   if (!currentService || !Icon) return null;
@@ -215,12 +215,12 @@ const ServicesPage = () => {
           <div className="relative max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <div className="flex items-center space-x-3 mb-6">
+                <div className="flex items-center space-x-8 mb-10">
                   <div className="p-4 bg-white/10 backdrop-blur-sm rounded-xl">
-                    <Icon className="h-8 w-8 text-white" />
+                    <Icon className="h-10 w-10 text-white" />
                   </div>
                   <div>
-                    <h1 className="text-4xl md:text-5xl font-bold">{currentService.title}</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold text-white">{currentService.title}</h1>
                     <p className="text-xl text-blue-100 mt-2">{currentService.subtitle}</p>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ const ServicesPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6">Key Features & Capabilities</h2>
+                <h2 className="text-3xl font-bold text-white mb-6">Key Features & Capabilities</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {currentService.features.map((feature, idx) => (
                     <div

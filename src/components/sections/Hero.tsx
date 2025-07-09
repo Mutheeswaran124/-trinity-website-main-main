@@ -1,60 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
+import Button from '../ui /Button'; // ✅ fixed path
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from "framer-motion";
+import ChatBot from '../ChatBot';
 
-import mainhero from '../../Assets/animations/mainhero.lottie?url';
+import mainhero from '../../animations/mainhero.lottie?url';
+import RevolImg from "../../Assets/logo/revol-lims-logo.png";
 
-interface ButtonProps {
-  children: React.ReactNode;
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
-  className?: string;
-  onClick?: () => void;
-  disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
-}
-
-const Button: React.FC<ButtonProps> = ({
-  children,
-  variant = 'primary',
-  size = 'md',
-  className = '',
-  onClick,
-  disabled = false,
-  type = 'button',
-}) => {
-  const baseClasses = 'font-semibold rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
-  
-  const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500',
-    secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500',
-  };
-  
-  const sizeClasses = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
-  };
-  
-  const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
-  
-  const buttonClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`;
-  
-  return (
-    <button
-      type={type}
-      className={buttonClasses}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
-};
-
-const partnerLogos = [
-  'https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png',
+const partnerLogos: string[] = [
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3YZGyB5IxenMY4-G6RpRsZ8fqUccK9twgBiHumO8ze3-YNkPuYiHSR1TZ_6hhQ7Dbews&usqp=CAU',
   'https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg',
   'https://www.levelequity.com/wp-content/uploads/level-investment-fivetran-logo.png',
   'https://www.getdbt.com/_next/image?url=%2Fimg%2Flogos%2Fdbt-labs-logo.svg&w=256&q=75',
@@ -63,7 +18,7 @@ const partnerLogos = [
   'https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg',
   'https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg',
   'https://upload.wikimedia.org/wikipedia/commons/5/59/SAP_2011_logo.svg',
-  'https://via.placeholder.com/200x60/22396b/ffffff?text=REVOL+LIMS', // Placeholder for revol-lims-logo
+  RevolImg,
 ];
 
 function useTypewriter(text: string, speed = 30, delay = 0) {
@@ -88,7 +43,7 @@ function useTypewriter(text: string, speed = 30, delay = 0) {
 }
 
 const headline = "Empowering Data-Driven Decisions Across the Globe";
-const subtext = "Harnessing the power of data analytics to transform businesses in Oman, Netherlands, USA, and India.";
+const subtext = "Harnessing the power of data analytics to transform businesses in USA, India, Oman, and Netharlands.";
 
 const Hero: React.FC = () => {
   const ref = useRef(null);
@@ -105,13 +60,13 @@ const Hero: React.FC = () => {
       100% { transform: translateX(-50%); }
     }
     .logo-track {
-      animation: marquee 30s linear infinite;
+      animation: marquee 20s linear infinite;
     }
   `;
 
   return (
-    <div className="pt-[70px] sm:pt-[70px] md:pt-[90px] pb-8 md:pb-16 bg-white relative overflow-hidden">
-      {/* ✨ Background Blobs */}
+    <div className="pt-16 sm:pt-20 md:pt-36 pb-8 md:pb-16 bg-white relative overflow-hidden">
+      {/* Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -120,7 +75,7 @@ const Hero: React.FC = () => {
 
       <style dangerouslySetInnerHTML={{ __html: carouselStyle }} />
 
-      {/* 🌍 Main Content */}
+      {/* Main Content */}
       <div ref={ref} className="mx-auto px-4 max-w-[1200px] relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-8 gap-x-10 md:gap-x-12 items-center">
           {/* Left */}
@@ -130,33 +85,35 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-2xl mx-auto lg:mx-0 flex flex-col"
           >
-            <div className="flex items-center gap-2 bg-white rounded-full px-4 py-1 w-fit mb-4 mt-4 shadow-md border border-blue-900/40 backdrop-blur-sm">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png"
-                alt="Databricks"
-                className="h-7 w-7 object-contain"
-              />
-              <a
-                href="https://www.databricks.com/partners"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#22396b] font-bold text-sm md:text-base tracking-wide hover:underline flex items-center"
-              >
-                Trinity-databricks consulting partner
-                <ArrowUpRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
+          <div className="flex items-center gap-3 bg-white rounded-full px-4 py-1 w-fit mb-4 mt-4 shadow-md border border-blue-900/40 backdrop-blur-sm">
+  <img
+    src={partnerLogos[0]}
+    alt="Databricks Logo"
+    className="h-11 w-11 object-contain"
+  />
+  <a
+    href="https://www.databricks.com/partners"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-1 text-[#22396b] font-bold text-sm tracking-wide hover:underline"
+  >
+    Trinity-databricks consulting partner
+    <ArrowUpRight className="w-4 h-4 ml-1" />
+  </a>
+</div>
+
 
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 text-[#22396b] min-h-[3.5em]">
-              {highlightIndex === -1 ? headlineTyped : (
-                <>
-                  {headlineTyped.slice(0, highlightIndex)}
-                  <span className="text-blue-600">
-                    {headlineTyped.slice(highlightIndex, highlightIndex + highlight.length)}
-                  </span>
-                  {headlineTyped.slice(highlightIndex + highlight.length)}
-                </>
-              )}
+              {highlightIndex === -1
+                ? headlineTyped
+                : <>
+                    {headlineTyped.slice(0, highlightIndex)}
+                    <span style={{ color: '#3d3dff' }}>
+                      {headlineTyped.slice(highlightIndex, highlightIndex + highlight.length)}
+                    </span>
+                    {headlineTyped.slice(highlightIndex + highlight.length)}
+                  </>
+              }
             </h1>
 
             <p className="text-lg mb-4 text-[#22396b]" style={{ fontFamily: 'Roboto, sans-serif', minHeight: '2.5em' }}>
@@ -188,7 +145,6 @@ const Hero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Partner Logos */}
         <div className="mt-8 md:mt-14 -mb-4 text-center">
           <p className="text-black font-bold text-lg sm:text-2xl md:text-2xl">
             Trusted by industry leaders in data and analytics
@@ -196,32 +152,24 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* 🔁 Carousel */}
-      <section className="logo-carousel overflow-hidden relative mt-4 md:mt-8 pt-4 md:pt-6 pb-4 md:pb-8 w-full bg-white">
-        <div className="absolute left-0 top-0 h-full w-8 bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 h-full w-8 bg-gradient-to-l from-white to-transparent z-10"></div>
-
+      {/* Logo Carousel */}
+      <section className="logo-carousel overflow-hidden relative mt-4 md:mt-8 pt-4 md:pt-6 pb-4 md:pb-8 w-screen bg-white">
         <div className="max-w-none mx-auto">
           <div className="logo-track flex items-center gap-10 md:gap-20 w-max px-4">
-            {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((logo, idx) => {
-              const originalIndex = idx % partnerLogos.length;
-              const isRevol = originalIndex === partnerLogos.length - 1;
-
-              return (
-                <img
-                  key={idx}
-                  src={typeof logo === 'string' ? logo : logo}
-                  alt={`Partner logo ${idx + 1}`}
-                  className={`object-contain transition filter grayscale hover:grayscale-0 opacity-70 hover:opacity-100 w-auto
-                    ${isRevol ? 'h-8 sm:h-10 md:h-14' : 'h-4 sm:h-6 md:h-10'}`}
-                  loading="eager"
-                />
-              );
-            })}
+            {[...partnerLogos, ...partnerLogos].map((logo, idx) => (
+              <img
+                key={idx}
+                src={logo}
+                alt={`Logo ${idx + 1}`}
+                className="h-6 sm:h-8 md:h-12 w-auto object-contain transition"
+                loading="lazy"
+              />
+            ))}
           </div>
         </div>
       </section>
 
+      <ChatBot />
     </div>
   );
 };

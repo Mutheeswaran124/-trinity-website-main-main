@@ -18,7 +18,7 @@ import TechStack from './components/sections/TechStack';
 import OurBusinesses from './components/sections/OurBusinesses'; // ✅ Make sure this file uses `export default`
 
 // Pages
-import OurStory from './components/CompanyStory/OurStory';
+
 import ServicesPage from './components/Services/ServicesPage';
 import IndustriesPage from './components/IndustriesPage';
 
@@ -56,7 +56,8 @@ function HomePage() {
         <Hero />
         <TestimonialCard />
         <About />
-        <Services onServiceClick={() => {}} />
+       <Services onServiceClick={() => {}} />
+
         <TechStack />
         <Industries />
         <GlobalPresence />
@@ -75,7 +76,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/our-story" element={<OurStory />} />
+        
         <Route path="/industries" element={<IndustriesPage />} />
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/services/:serviceId" element={<ServicesPage />} />

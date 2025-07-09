@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -13,7 +12,11 @@ import {
   Briefcase,
 } from 'lucide-react';
 
-const Services: React.FC = () => {
+interface ServicesProps {
+  onServiceClick?: () => void; // ✅ Added this to fix the prop error
+}
+
+const Services: React.FC<ServicesProps> = ({ onServiceClick }) => {
   const navigate = useNavigate();
 
   const services = [
@@ -22,61 +25,62 @@ const Services: React.FC = () => {
       title: 'Data Strategy',
       description: 'Crafting tailored data roadmaps to align with your business objectives.',
       imageUrl: 'https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'data-strategy'
+      route: 'data-strategy',
     },
     {
       icon: <Database size={32} className="text-white mb-1" />,
       title: 'Data Engineering',
       description: 'Building robust data infrastructures for smooth flow and processing.',
       imageUrl: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'data-engineering'
+      route: 'data-engineering',
     },
     {
       icon: <ShieldCheck size={32} className="text-white mb-1" />,
       title: 'Data Governance',
       description: 'Ensuring data quality, security, and compliance.',
       imageUrl: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'data-governance'
+      route: 'data-governance',
     },
     {
       icon: <BarChart size={32} className="text-white mb-1" />,
       title: 'Business Intelligence',
       description: 'Transforming data into insights for decision-making.',
       imageUrl: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'business-intelligence'
+      route: 'business-intelligence',
     },
     {
       icon: <Cloud size={32} className="text-white mb-1" />,
       title: 'Data Modernization',
       description: 'Upgrading systems for better performance and scalability.',
       imageUrl: 'https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'cloud-migration'
+      route: 'cloud-migration',
     },
     {
       icon: <BrainCircuit size={32} className="text-white mb-1" />,
       title: 'AI Solutions',
       description: 'Applying AI to automate and reveal insights.',
       imageUrl: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'artificial-intelligence'
+      route: 'artificial-intelligence',
     },
     {
       icon: <Users size={32} className="text-white mb-1" />,
       title: 'Staffing Solutions',
       description: 'Providing data experts to extend your team.',
       imageUrl: 'https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'staffing-solutions'
+      route: 'staffing-solutions',
     },
     {
       icon: <Briefcase size={32} className="text-white mb-1" />,
       title: 'ERP Planning',
       description: 'Integrating business processes for efficiency.',
       imageUrl: 'https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=640',
-      route: 'erp-planning'
+      route: 'erp-planning',
     },
   ];
 
   const handleServiceClick = (service: any) => {
-    console.log(`Navigating to: /services/${service.route}`);
+    if (onServiceClick) onServiceClick(); // Optional call
+    console.log('Navigating to:', `/services/${service.route}`); // Debug log
     navigate(`/services/${service.route}`);
   };
 
@@ -94,70 +98,54 @@ const Services: React.FC = () => {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Comprehensive solutions tailored to your data-driven growth
           </p>
-         
         </div>
 
-        {/* Desktop Layout */}
+        {/* 💻 Desktop Grid with Lottie */}
         <div className="hidden lg:block">
           <div className="grid grid-cols-3 grid-rows-3 gap-6 max-w-6xl mx-auto min-h-[600px]">
-            {/* Center Lottie Animation */}
             <div className="col-start-2 row-start-2 flex justify-center items-center z-10">
-              <div className="relative">
-                <DotLottieReact
-                  src="https://lottie.host/abc637a9-8669-4167-9d37-f39faecbf35a/phzPSr5Ebn.lottie"
-                  loop
-                  autoplay
-                  style={{ width: 200, height: 200 }}
-                />
-              </div>
+              <DotLottieReact
+                src="https://lottie.host/abc637a9-8669-4167-9d37-f39faecbf35a/phzPSr5Ebn.lottie"
+                loop
+                autoplay
+                style={{ width: 200, height: 200 }}
+              />
             </div>
 
-            {/* Service Cards */}
             {services.map((service, index) => {
               const positions = [
-                { col: 1, row: 1 }, // Top Left
-                { col: 2, row: 1 }, // Top Center
-                { col: 3, row: 1 }, // Top Right
-                { col: 1, row: 2 }, // Middle Left
-                { col: 3, row: 2 }, // Middle Right
-                { col: 1, row: 3 }, // Bottom Left
-                { col: 2, row: 3 }, // Bottom Center
-                { col: 3, row: 3 }, // Bottom Right
+                { col: 1, row: 1 },
+                { col: 2, row: 1 },
+                { col: 3, row: 1 },
+                { col: 1, row: 2 },
+                { col: 3, row: 2 },
+                { col: 1, row: 3 },
+                { col: 2, row: 3 },
+                { col: 3, row: 3 },
               ];
-              
-              const position = positions[index];
-              
+
+              const pos = positions[index];
+
               return (
-                <div 
+                <div
                   key={service.title}
-                  className={`col-start-${position.col} row-start-${position.row} h-56`}
+                  className={`col-start-${pos.col} row-start-${pos.row} h-56`}
                 >
-                  <div 
-                    className="relative overflow-hidden rounded-xl group cursor-pointer h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  <div
                     onClick={() => handleServiceClick(service)}
+                    className="relative overflow-hidden rounded-xl group cursor-pointer h-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                   >
-                    {/* Background Image */}
-                    <div 
+                    <div
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                       style={{ backgroundImage: `url(${service.imageUrl})` }}
                     />
-                    
-                    {/* Dark Overlay */}
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
-                    
-                    {/* Content Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="p-6 flex flex-col items-center text-center h-full justify-center">
-                        <div className="transform group-hover:scale-110 transition-transform duration-300">
-                          {service.icon}
-                        </div>
-                        <h3 className="text-lg font-bold text-white mt-3 group-hover:text-blue-200 transition-colors duration-300">
-                          {service.title}
-                        </h3>
-                        <p className="text-white/90 text-sm mt-2 leading-relaxed group-hover:text-white transition-colors duration-300">
-                          {service.description}
-                        </p>
-                        <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {service.icon}
+                        <h3 className="text-lg font-bold text-white mt-3">{service.title}</h3>
+                        <p className="text-white/90 text-sm mt-2">{service.description}</p>
+                        <div className="mt-4">
                           <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
                             <span className="text-white text-sm font-medium">Learn More →</span>
                           </div>
@@ -171,17 +159,15 @@ const Services: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile & Tablet Layout */}
+        {/* 📱 Mobile/Tablet Layout */}
         <div className="lg:hidden">
           <div className="flex justify-center mb-8">
-            <div className="relative">
-              <DotLottieReact
-                src="https://lottie.host/abc637a9-8669-4167-9d37-f39faecbf35a/phzPSr5Ebn.lottie"
-                loop
-                autoplay
-                style={{ width: 140, height: 140 }}
-              />
-            </div>
+            <DotLottieReact
+              src="https://lottie.host/abc637a9-8669-4167-9d37-f39faecbf35a/phzPSr5Ebn.lottie"
+              loop
+              autoplay
+              style={{ width: 140, height: 140 }}
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -191,28 +177,17 @@ const Services: React.FC = () => {
                 className="relative overflow-hidden rounded-xl group cursor-pointer h-48 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                 onClick={() => handleServiceClick(service)}
               >
-                {/* Background Image */}
-                <div 
+                <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                   style={{ backgroundImage: `url(${service.imageUrl})` }}
                 />
-                
-                {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
-                
-                {/* Content Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-indigo-600/90 to-purple-600/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="p-6 flex flex-col items-center text-center h-full justify-center">
-                    <div className="transform group-hover:scale-110 transition-transform duration-300">
-                      {service.icon}
-                    </div>
-                    <h3 className="text-lg font-bold text-white mt-3 group-hover:text-blue-200 transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-white/90 text-sm mt-2 leading-relaxed group-hover:text-white transition-colors duration-300">
-                      {service.description}
-                    </p>
-                    <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {service.icon}
+                    <h3 className="text-lg font-bold text-white mt-3">{service.title}</h3>
+                    <p className="text-white/90 text-sm mt-2">{service.description}</p>
+                    <div className="mt-4">
                       <div className="bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
                         <span className="text-white text-sm font-medium">Learn More →</span>
                       </div>
