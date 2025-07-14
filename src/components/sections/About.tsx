@@ -17,9 +17,9 @@ import {
 
 const About = () => {
   const stats = [
-    { icon: Users, value: '100+', label: 'Projects Delivered', color: 'from-blue-500 to-purple-600' },
+    { icon: Users, value: '50+', label: 'Projects Delivered', color: 'from-blue-500 to-purple-600' },
     { icon: TrendingUp, value: '25+', label: 'Years Experience', color: 'from-purple-500 to-pink-600' },
-    { icon: Globe, value: '10+', label: 'Countries Served', color: 'from-pink-500 to-red-600' },
+    { icon: Globe, value: '4+', label: 'Countries Served', color: 'from-pink-500 to-red-600' },
     { icon: Database, value: '100+', label: 'Combined Experience', color: 'from-red-500 to-orange-600' },
   ];
 

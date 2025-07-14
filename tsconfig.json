@@ -5,7 +5,7 @@
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/ui/*"]
     },
-    "target": "ESNext",
+    "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Node",
     "jsx": "react-jsx",

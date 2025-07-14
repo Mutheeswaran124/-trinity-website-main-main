@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { TrendingUp, Database, ExternalLink, Building2, Users, GraduationCap, Globe, ArrowUpRight } from 'lucide-react';
-import KalloriConnect from "../../Assets/logo/KalloriConnect.jpeg";
+import KalloriConnect from "../../Assets/logo/KalloriConnect.png";
 
 function App() {
   const businesses = [

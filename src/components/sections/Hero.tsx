@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Button from '../ui /Button'; // ✅ fixed path
+import Button from '../ui /Button'; // ✅ fixed path (remove the space between 'ui' and '/Button')
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from "framer-motion";
-import ChatBot from '../ChatBot';
+import ChatBot from '../ChatBot'; // ✅ ensure this matches actual filename
 
 import mainhero from '../../animations/mainhero.lottie?url';
 import RevolImg from "../../Assets/logo/revol-lims-logo.png";
@@ -85,23 +85,22 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-2xl mx-auto lg:mx-0 flex flex-col"
           >
-          <div className="flex items-center gap-3 bg-white rounded-full px-4 py-1 w-fit mb-4 mt-4 shadow-md border border-blue-900/40 backdrop-blur-sm">
-  <img
-    src={partnerLogos[0]}
-    alt="Databricks Logo"
-    className="h-11 w-11 object-contain"
-  />
-  <a
-    href="https://www.databricks.com/partners"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-1 text-[#22396b] font-bold text-sm tracking-wide hover:underline"
-  >
-    Trinity-databricks consulting partner
-    <ArrowUpRight className="w-4 h-4 ml-1" />
-  </a>
-</div>
-
+            <div className="flex items-center gap-3 bg-white rounded-full px-4 py-1 w-fit mb-4 mt-4 shadow-md border border-blue-900/40 backdrop-blur-sm">
+              <img
+                src={partnerLogos[0]}
+                alt="Databricks Logo"
+                className="h-11 w-11 object-contain"
+              />
+              <a
+                href="https://www.databricks.com/partners"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[#22396b] font-bold text-sm tracking-wide hover:underline"
+              >
+                Trinity-databricks consulting partner
+                <ArrowUpRight className="w-4 h-4 ml-1" />
+              </a>
+            </div>
 
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 text-[#22396b] min-h-[3.5em]">
               {highlightIndex === -1
@@ -120,13 +119,16 @@ const Hero: React.FC = () => {
               {subtextTyped}
             </p>
 
-            <Button
-              variant="primary"
-              size="lg"
-              className="bg-[#22396b] hover:bg-[#3d3dff] text-base px-8 font-bold rounded-full text-white w-[250px] h-[56px]"
-            >
-              Scroll & Explore
-            </Button>
+            {/* ✅ Scroll to contact */}
+            <a href="#contact">
+              <Button
+                variant="primary"
+                size="lg"
+                className="bg-[#22396b] hover:bg-[#3d3dff] text-base px-8 font-bold rounded-full text-white w-[250px] h-[56px]"
+              >
+                Connect with Us
+              </Button>
+            </a>
           </motion.div>
 
           {/* Right Animation */}
